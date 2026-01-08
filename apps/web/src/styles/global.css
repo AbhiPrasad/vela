@@ -8,47 +8,144 @@
   }
 
   body {
-    @apply bg-zinc-950 text-zinc-100;
+    @apply bg-cyber-black text-gray-100;
+    font-feature-settings: "liga" 1, "calt" 1;
   }
 
-  /* Custom scrollbar */
+  /* Cyberpunk scrollbar */
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 6px;
+    height: 6px;
   }
 
   ::-webkit-scrollbar-track {
-    @apply bg-zinc-900;
+    @apply bg-cyber-darker;
   }
 
   ::-webkit-scrollbar-thumb {
-    @apply bg-zinc-700 rounded;
+    @apply bg-neon-orange/50;
+    border: 1px solid rgba(255, 106, 0, 0.3);
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-zinc-600;
+    @apply bg-neon-orange/70;
+  }
+
+  /* Selection styling */
+  ::selection {
+    @apply bg-neon-cyan/30 text-white;
   }
 }
 
 @layer components {
+  /* Primary button - neon orange glow */
   .btn-primary {
-    @apply bg-blue-600 hover:bg-blue-500 text-white font-semibold px-4 py-2 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed;
+    @apply bg-neon-orange text-cyber-black font-semibold px-4 py-2 transition-all duration-200
+           border border-neon-orange
+           hover:shadow-neon-orange hover:bg-neon-orange/90
+           disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:shadow-none;
   }
 
+  /* Secondary button - outlined cyan */
   .btn-secondary {
-    @apply bg-zinc-800 hover:bg-zinc-700 text-zinc-100 font-medium px-4 py-2 rounded-lg transition-colors;
+    @apply bg-transparent text-neon-cyan font-medium px-4 py-2 transition-all duration-200
+           border border-neon-cyan/50
+           hover:border-neon-cyan hover:shadow-neon-cyan hover:bg-neon-cyan/10;
   }
 
+  /* Ghost button */
+  .btn-ghost {
+    @apply bg-transparent text-gray-400 font-medium px-4 py-2 transition-all duration-200
+           border border-cyber-light
+           hover:text-neon-orange hover:border-neon-orange/50;
+  }
+
+  /* Input field - cyberpunk style */
   .input {
-    @apply bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500;
+    @apply bg-cyber-dark border border-cyber-light px-4 py-2 text-gray-100
+           focus:outline-none focus:border-neon-cyan focus:shadow-neon-cyan
+           placeholder:text-gray-600 transition-all duration-200;
   }
 
+  /* Card - dark panel with subtle border */
   .card {
-    @apply bg-zinc-900 border border-zinc-800 rounded-lg p-4;
+    @apply bg-cyber-darker border border-cyber-light p-4;
   }
 
+  /* Card with hover effect */
   .card-hover {
-    @apply card hover:border-zinc-700 transition-colors;
+    @apply card transition-all duration-200
+           hover:border-neon-orange/50 hover:shadow-neon-orange;
+  }
+
+  /* Neon text effects */
+  .text-neon-glow-orange {
+    text-shadow: 0 0 10px rgba(255, 106, 0, 0.7), 0 0 20px rgba(255, 106, 0, 0.5);
+  }
+
+  .text-neon-glow-cyan {
+    text-shadow: 0 0 10px rgba(0, 217, 255, 0.7), 0 0 20px rgba(0, 217, 255, 0.5);
+  }
+
+  .text-neon-glow-pink {
+    text-shadow: 0 0 10px rgba(255, 45, 146, 0.7), 0 0 20px rgba(255, 45, 146, 0.5);
+  }
+
+  /* Scanline overlay effect */
+  .scanlines {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scanlines::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.1) 2px,
+      rgba(0, 0, 0, 0.1) 4px
+    );
+    pointer-events: none;
+    z-index: 10;
+  }
+
+  /* Horizontal rule - neon style */
+  .hr-neon {
+    @apply border-0 h-px bg-neon-orange/30;
+  }
+
+  /* Badge base */
+  .badge {
+    @apply inline-flex items-center px-2 py-0.5 text-xs font-medium border;
+  }
+
+  /* Table styles */
+  .table-cyber {
+    @apply w-full text-sm;
+  }
+
+  .table-cyber th {
+    @apply text-left text-gray-500 uppercase text-xs font-medium px-4 py-3 border-b border-cyber-light;
+  }
+
+  .table-cyber td {
+    @apply px-4 py-3 border-b border-cyber-light/50;
+  }
+
+  .table-cyber tr:hover td {
+    @apply bg-cyber-dark/50;
+  }
+
+  /* Link styles */
+  .link-cyber {
+    @apply text-neon-cyan transition-all duration-200
+           hover:text-neon-cyan hover:underline hover:underline-offset-2;
   }
 }
 
@@ -57,6 +154,7 @@
     text-wrap: balance;
   }
 
+  /* Fade in animation */
   .animate-fade-in {
     animation: fadeIn 0.3s ease-in-out;
   }
@@ -70,5 +168,82 @@
       opacity: 1;
       transform: translateY(0);
     }
+  }
+
+  /* Glitch effect for text */
+  .glitch {
+    position: relative;
+  }
+
+  .glitch::before,
+  .glitch::after {
+    content: attr(data-text);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .glitch::before {
+    left: 2px;
+    text-shadow: -2px 0 #ff2d92;
+    clip: rect(24px, 550px, 90px, 0);
+    animation: glitch-anim 3s infinite linear alternate-reverse;
+  }
+
+  .glitch::after {
+    left: -2px;
+    text-shadow: -2px 0 #00d9ff;
+    clip: rect(85px, 550px, 140px, 0);
+    animation: glitch-anim 2s infinite linear alternate-reverse;
+  }
+
+  @keyframes glitch-anim {
+    0% {
+      clip: rect(51px, 9999px, 28px, 0);
+    }
+    20% {
+      clip: rect(70px, 9999px, 63px, 0);
+    }
+    40% {
+      clip: rect(26px, 9999px, 97px, 0);
+    }
+    60% {
+      clip: rect(82px, 9999px, 45px, 0);
+    }
+    80% {
+      clip: rect(39px, 9999px, 87px, 0);
+    }
+    100% {
+      clip: rect(15px, 9999px, 71px, 0);
+    }
+  }
+
+  /* Corner accents for containers */
+  .corner-accents {
+    position: relative;
+  }
+
+  .corner-accents::before,
+  .corner-accents::after {
+    content: "";
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-color: theme("colors.neon.orange");
+    border-style: solid;
+  }
+
+  .corner-accents::before {
+    top: -1px;
+    left: -1px;
+    border-width: 2px 0 0 2px;
+  }
+
+  .corner-accents::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 2px 2px 0;
   }
 }

@@ -9,16 +9,16 @@ interface Props {
 const { category, size = "small" } = Astro.props;
 
 const categoryColors: Record<ScriptCategory, string> = {
-  analytics: "bg-category-analytics/20 text-category-analytics",
-  advertising: "bg-category-advertising/20 text-category-advertising",
-  social: "bg-category-social/20 text-category-social",
-  "customer-support": "bg-category-customer-support/20 text-category-customer-support",
-  "ab-testing": "bg-category-ab-testing/20 text-category-ab-testing",
-  "tag-manager": "bg-category-tag-manager/20 text-category-tag-manager",
-  cdn: "bg-category-cdn/20 text-category-cdn",
-  fonts: "bg-category-fonts/20 text-category-fonts",
-  video: "bg-category-video/20 text-category-video",
-  other: "bg-category-other/20 text-category-other",
+  analytics: "border-category-analytics text-category-analytics",
+  advertising: "border-category-advertising text-category-advertising",
+  social: "border-category-social text-category-social",
+  "customer-support": "border-category-customer-support text-category-customer-support",
+  "ab-testing": "border-category-ab-testing text-category-ab-testing",
+  "tag-manager": "border-category-tag-manager text-category-tag-manager",
+  cdn: "border-category-cdn text-category-cdn",
+  fonts: "border-category-fonts text-category-fonts",
+  video: "border-category-video text-category-video",
+  other: "border-category-other text-category-other",
 };
 
 const categoryLabels: Record<ScriptCategory, string> = {
@@ -43,7 +43,7 @@ const sizeClasses = {
 
 <span
   class:list={[
-    "rounded-full font-medium whitespace-nowrap",
+    "border font-medium whitespace-nowrap uppercase tracking-wide bg-cyber-darker",
     categoryColors[category],
     sizeClasses[size],
   ]}

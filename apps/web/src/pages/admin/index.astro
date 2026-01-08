@@ -30,102 +30,121 @@ try {
 
 <AdminLayout title="Dashboard">
   <div class="mb-8">
-    <h1 class="text-3xl font-bold mb-2">Dashboard</h1>
-    <p class="text-zinc-400">Welcome back, {user?.name ?? user?.email}</p>
+    <span class="text-xs text-gray-600 uppercase tracking-[0.3em] font-mono">// system overview</span>
+    <h1 class="text-3xl font-bold mt-2 text-neon-orange">Dashboard</h1>
+    <p class="text-gray-500 font-mono text-sm mt-1">Welcome back, {user?.name ?? user?.email}</p>
   </div>
 
+  <!-- Stats Grid -->
   <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-    <div class="card">
+    <div class="bg-cyber-darker border border-cyber-light p-6 hover:border-neon-cyan/30 transition-all duration-200">
       <div class="flex items-center gap-4">
-        <div class="p-3 bg-blue-500/20 rounded-lg">
-          <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+        <div class="w-12 h-12 border border-neon-cyan/50 flex items-center justify-center text-neon-cyan">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
           </svg>
         </div>
         <div>
-          <p class="text-2xl font-bold">{patternCount}</p>
-          <p class="text-sm text-zinc-400">Script Patterns</p>
+          <p class="text-3xl font-bold text-neon-cyan">{patternCount}</p>
+          <p class="text-xs text-gray-500 uppercase tracking-wider">Script Patterns</p>
         </div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="bg-cyber-darker border border-cyber-light p-6 hover:border-neon-pink/30 transition-all duration-200">
       <div class="flex items-center gap-4">
-        <div class="p-3 bg-green-500/20 rounded-lg">
-          <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
+        <div class="w-12 h-12 border border-neon-pink/50 flex items-center justify-center text-neon-pink">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.994 1.994 0 013 12V7a4 4 0 014-4z"/>
           </svg>
         </div>
         <div>
-          <p class="text-2xl font-bold">{categoryCount}</p>
-          <p class="text-sm text-zinc-400">Categories</p>
+          <p class="text-3xl font-bold text-neon-pink">{categoryCount}</p>
+          <p class="text-xs text-gray-500 uppercase tracking-wider">Categories</p>
         </div>
       </div>
     </div>
 
-    <div class="card">
+    <div class="bg-cyber-darker border border-cyber-light p-6 hover:border-neon-orange/30 transition-all duration-200">
       <div class="flex items-center gap-4">
-        <div class="p-3 bg-purple-500/20 rounded-lg">
-          <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+        <div class="w-12 h-12 border border-neon-orange/50 flex items-center justify-center text-neon-orange">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
           </svg>
         </div>
         <div>
-          <p class="text-2xl font-bold capitalize">{user?.role}</p>
-          <p class="text-sm text-zinc-400">Your Role</p>
+          <p class="text-3xl font-bold text-neon-orange capitalize">{user?.role}</p>
+          <p class="text-xs text-gray-500 uppercase tracking-wider">Access Level</p>
         </div>
       </div>
     </div>
   </div>
 
+  <!-- Action Panels -->
   <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-    <div class="card">
-      <h2 class="text-lg font-semibold mb-4">Quick Actions</h2>
+    <div class="bg-cyber-darker border border-cyber-light p-6">
+      <div class="mb-4">
+        <span class="text-xs text-gray-600 uppercase tracking-[0.2em] font-mono">// quick actions</span>
+      </div>
       <div class="space-y-3">
         <a
           href="/admin/patterns/new"
-          class="flex items-center gap-3 p-3 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors"
+          class="flex items-center gap-4 p-4 bg-cyber-dark border border-cyber-light hover:border-neon-cyan/50 hover:shadow-neon-cyan transition-all duration-200 group"
         >
-          <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
-          </svg>
-          <span>Add New Pattern</span>
+          <div class="w-10 h-10 border border-neon-cyan/30 flex items-center justify-center text-neon-cyan group-hover:border-neon-cyan transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v16m8-8H4"/>
+            </svg>
+          </div>
+          <span class="text-sm uppercase tracking-wide text-gray-300 group-hover:text-neon-cyan transition-colors">Add New Pattern</span>
         </a>
         <a
           href="/admin/patterns"
-          class="flex items-center gap-3 p-3 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors"
+          class="flex items-center gap-4 p-4 bg-cyber-dark border border-cyber-light hover:border-neon-amber/50 hover:shadow-neon-amber transition-all duration-200 group"
         >
-          <svg class="w-5 h-5 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
-          </svg>
-          <span>View All Patterns</span>
+          <div class="w-10 h-10 border border-neon-amber/30 flex items-center justify-center text-neon-amber group-hover:border-neon-amber transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 10h16M4 14h16M4 18h16"/>
+            </svg>
+          </div>
+          <span class="text-sm uppercase tracking-wide text-gray-300 group-hover:text-neon-amber transition-colors">View All Patterns</span>
         </a>
         <a
           href="/"
-          class="flex items-center gap-3 p-3 bg-zinc-800 rounded-lg hover:bg-zinc-700 transition-colors"
+          class="flex items-center gap-4 p-4 bg-cyber-dark border border-cyber-light hover:border-neon-pink/50 hover:shadow-neon-pink transition-all duration-200 group"
         >
-          <svg class="w-5 h-5 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
-          </svg>
-          <span>Go to Public Site</span>
+          <div class="w-10 h-10 border border-neon-pink/30 flex items-center justify-center text-neon-pink group-hover:border-neon-pink transition-all duration-200">
+            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9"/>
+            </svg>
+          </div>
+          <span class="text-sm uppercase tracking-wide text-gray-300 group-hover:text-neon-pink transition-colors">Public Interface</span>
         </a>
       </div>
     </div>
 
-    <div class="card">
-      <h2 class="text-lg font-semibold mb-4">Getting Started</h2>
-      <div class="text-sm text-zinc-400 space-y-3">
-        <p>
-          Welcome to the Vela admin panel. Here you can manage the script pattern database that powers the third-party script auditor.
+    <div class="bg-cyber-darker border border-cyber-light p-6">
+      <div class="mb-4">
+        <span class="text-xs text-gray-600 uppercase tracking-[0.2em] font-mono">// system info</span>
+      </div>
+      <div class="text-sm text-gray-400 space-y-4 font-mono">
+        <p class="leading-relaxed">
+          <span class="text-gray-600">// </span>Welcome to the VELA admin interface. Manage the script pattern database that powers the third-party script auditor.
         </p>
-        <ul class="list-disc list-inside space-y-1">
-          <li><strong>Patterns</strong> - Add, edit, or remove script detection patterns</li>
+        <ul class="space-y-2 text-gray-500">
+          <li class="flex items-start gap-2">
+            <span class="text-neon-cyan">&gt;</span>
+            <span><span class="text-gray-300">patterns</span> - Script detection patterns</span>
+          </li>
           {user?.role === "admin" && (
-            <li><strong>Users</strong> - Manage admin and editor accounts</li>
+            <li class="flex items-start gap-2">
+              <span class="text-neon-cyan">&gt;</span>
+              <span><span class="text-gray-300">users</span> - Access control management</span>
+            </li>
           )}
         </ul>
-        <p>
-          Use the sidebar to navigate between sections.
+        <p class="text-gray-600 text-xs">
+          // Use sidebar navigation to access modules
         </p>
       </div>
     </div>

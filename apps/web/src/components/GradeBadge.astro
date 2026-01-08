@@ -9,17 +9,25 @@ interface Props {
 const { grade, size = "medium" } = Astro.props;
 
 const gradeColors: Record<Grade, string> = {
-  A: "bg-grade-a",
-  B: "bg-grade-b",
-  C: "bg-grade-c",
-  D: "bg-grade-d",
-  F: "bg-grade-f",
+  A: "border-grade-a text-grade-a",
+  B: "border-grade-b text-grade-b",
+  C: "border-grade-c text-grade-c",
+  D: "border-grade-d text-grade-d",
+  F: "border-grade-f text-grade-f",
+};
+
+const gradeGlows: Record<Grade, string> = {
+  A: "shadow-[0_0_10px_rgba(0,217,255,0.5)]",
+  B: "shadow-[0_0_10px_rgba(10,189,198,0.5)]",
+  C: "shadow-[0_0_10px_rgba(255,215,0,0.5)]",
+  D: "shadow-[0_0_10px_rgba(255,106,0,0.5)]",
+  F: "shadow-[0_0_10px_rgba(255,51,51,0.5)]",
 };
 
 const sizeClasses = {
-  small: "w-8 h-8 text-sm",
-  medium: "w-12 h-12 text-xl",
-  large: "w-16 h-16 text-3xl",
+  small: "w-8 h-8 text-sm border",
+  medium: "w-12 h-12 text-xl border-2",
+  large: "w-16 h-16 text-3xl border-2",
 };
 
 const gradeLabels: Record<Grade, string> = {
@@ -31,17 +39,18 @@ const gradeLabels: Record<Grade, string> = {
 };
 ---
 
-<div class="flex items-center gap-2">
+<div class="flex items-center gap-3">
   <div
     class:list={[
-      "rounded-lg flex items-center justify-center font-bold text-white",
+      "flex items-center justify-center font-bold bg-cyber-darker",
       gradeColors[grade],
+      gradeGlows[grade],
       sizeClasses[size],
     ]}
   >
     {grade}
   </div>
   {size === "large" && (
-    <span class="text-zinc-400 text-sm">{gradeLabels[grade]}</span>
+    <span class="text-gray-500 text-sm uppercase tracking-wider">{gradeLabels[grade]}</span>
   )}
 </div>

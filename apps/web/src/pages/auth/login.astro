@@ -12,29 +12,30 @@ if (Astro.locals.user) {
 
 <BaseLayout title="Login">
   <div class="mx-auto max-w-md px-4 py-16">
-    <div class="card">
+    <div class="bg-cyber-darker border border-cyber-light p-8">
       <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold mb-2">Welcome back</h1>
-        <p class="text-zinc-400">Sign in to access the admin panel</p>
+        <span class="text-xs text-gray-600 uppercase tracking-[0.3em] font-mono">// authentication required</span>
+        <h1 class="text-2xl font-bold mt-3 text-neon-orange">Access Terminal</h1>
+        <p class="text-gray-500 text-sm font-mono mt-2">Enter credentials to access admin systems</p>
       </div>
 
-      <form id="login-form" class="space-y-4">
+      <form id="login-form" class="space-y-5">
         <div>
-          <label for="email" class="block text-sm font-medium text-zinc-300 mb-1">
-            Email
+          <label for="email" class="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wider">
+            Email Address
           </label>
           <input
             type="email"
             id="email"
             name="email"
             required
-            class="input w-full"
-            placeholder="you@example.com"
+            class="w-full bg-cyber-dark border border-cyber-light px-4 py-3 text-gray-100 placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:shadow-neon-cyan transition-all duration-200 font-mono"
+            placeholder="operator@system.net"
           />
         </div>
 
         <div>
-          <label for="password" class="block text-sm font-medium text-zinc-300 mb-1">
+          <label for="password" class="block text-xs font-medium text-gray-400 mb-2 uppercase tracking-wider">
             Password
           </label>
           <input
@@ -42,17 +43,23 @@ if (Astro.locals.user) {
             id="password"
             name="password"
             required
-            class="input w-full"
-            placeholder="Enter your password"
+            class="w-full bg-cyber-dark border border-cyber-light px-4 py-3 text-gray-100 placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:shadow-neon-cyan transition-all duration-200 font-mono"
+            placeholder="••••••••••••"
           />
         </div>
 
-        <div id="error-message" class="hidden text-red-400 text-sm"></div>
+        <div id="error-message" class="hidden text-neon-red text-sm font-mono"></div>
 
-        <button type="submit" class="btn-primary w-full" id="submit-btn">
-          Sign in
+        <button type="submit" class="w-full bg-neon-orange text-cyber-black font-bold py-3 uppercase tracking-wider border border-neon-orange hover:shadow-neon-orange transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed" id="submit-btn">
+          Authenticate
         </button>
       </form>
+
+      <div class="mt-6 pt-6 border-t border-cyber-light">
+        <p class="text-xs text-gray-600 text-center font-mono">
+          // authorized personnel only
+        </p>
+      </div>
     </div>
   </div>
 </BaseLayout>
@@ -69,7 +76,7 @@ if (Astro.locals.user) {
     const password = document.getElementById("password").value;
 
     submitBtn.disabled = true;
-    submitBtn.textContent = "Signing in...";
+    submitBtn.textContent = "Authenticating...";
     errorMessage.classList.add("hidden");
 
     try {
@@ -83,16 +90,16 @@ if (Astro.locals.user) {
       const data = await response.json();
 
       if (!response.ok) {
-        throw new Error(data.message ?? "Invalid email or password");
+        throw new Error(data.message ?? "Authentication failed");
       }
 
       // Redirect on success
       window.location.href = redirect;
     } catch (err) {
-      errorMessage.textContent = err.message;
+      errorMessage.textContent = `// ERROR: ${err.message}`;
       errorMessage.classList.remove("hidden");
       submitBtn.disabled = false;
-      submitBtn.textContent = "Sign in";
+      submitBtn.textContent = "Authenticate";
     }
   });
 </script>

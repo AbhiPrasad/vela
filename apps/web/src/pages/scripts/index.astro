@@ -48,9 +48,10 @@ try {
 <BaseLayout title="Script Database">
   <div class="mx-auto max-w-6xl px-4 py-8">
     <div class="mb-8">
-      <h1 class="text-3xl font-bold mb-2">Script Database</h1>
-      <p class="text-zinc-400">
-        Browse our database of {scripts.length}+ known third-party scripts
+      <span class="text-xs text-gray-600 uppercase tracking-[0.3em] font-mono">// pattern registry</span>
+      <h1 class="text-3xl font-bold mt-2 text-neon-orange">Script Database</h1>
+      <p class="text-gray-500 font-mono text-sm mt-1">
+        Browse {scripts.length}+ known third-party script patterns
       </p>
     </div>
 
@@ -64,11 +65,11 @@ try {
             name="search"
             placeholder="Search scripts..."
             value={searchQuery || ""}
-            class="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:border-blue-500"
+            class="w-full bg-cyber-dark border border-cyber-light px-4 py-2 pl-10 text-gray-100 placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:shadow-neon-cyan transition-all duration-200 font-mono"
           />
-          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">
-            🔍
-          </span>
+          <svg class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-600 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+          </svg>
         </div>
       </form>
 
@@ -77,10 +78,10 @@ try {
         <a
           href="/scripts"
           class:list={[
-            "px-3 py-1.5 rounded-full text-sm transition-colors",
+            "px-3 py-1.5 text-sm transition-all duration-200 border uppercase tracking-wide",
             !selectedCategory
-              ? "bg-blue-500 text-white"
-              : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700",
+              ? "bg-neon-orange/10 border-neon-orange text-neon-orange"
+              : "bg-cyber-darker border-cyber-light text-gray-400 hover:border-neon-cyan/50 hover:text-neon-cyan",
           ]}
         >
           All
@@ -89,10 +90,10 @@ try {
           <a
             href={`/scripts?category=${category}`}
             class:list={[
-              "px-3 py-1.5 rounded-full text-sm transition-colors",
+              "px-3 py-1.5 text-sm transition-all duration-200 border uppercase tracking-wide",
               selectedCategory === category
-                ? "bg-blue-500 text-white"
-                : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700",
+                ? "bg-neon-orange/10 border-neon-orange text-neon-orange"
+                : "bg-cyber-darker border-cyber-light text-gray-400 hover:border-neon-cyan/50 hover:text-neon-cyan",
             ]}
           >
             {category} ({count})
@@ -106,21 +107,21 @@ try {
       {scripts.map((script) => (
         <a
           href={`/scripts/${script.id}`}
-          class="block bg-zinc-900 border border-zinc-800 rounded-lg p-4 hover:border-zinc-700 transition-colors"
+          class="block bg-cyber-darker border border-cyber-light p-4 hover:border-neon-orange/50 hover:shadow-neon-orange transition-all duration-200"
         >
           <div class="flex items-start justify-between mb-2">
-            <h3 class="font-semibold">{script.name}</h3>
+            <h3 class="font-semibold text-gray-100">{script.name}</h3>
             <CategoryBadge category={script.category} />
           </div>
-          <p class="text-sm text-zinc-400 mb-3">{script.vendor}</p>
+          <p class="text-sm text-gray-500 mb-3 font-mono">{script.vendor}</p>
           {script.knownIssues.length > 0 && (
-            <p class="text-xs text-orange-400">
-              {script.knownIssues.length} known issue{script.knownIssues.length > 1 ? "s" : ""}
+            <p class="text-xs text-neon-orange font-mono">
+              &gt; {script.knownIssues.length} known issue{script.knownIssues.length > 1 ? "s" : ""}
             </p>
           )}
           {script.alternatives.length > 0 && (
-            <p class="text-xs text-green-400">
-              {script.alternatives.length} alternative{script.alternatives.length > 1 ? "s" : ""} available
+            <p class="text-xs text-neon-cyan font-mono">
+              &gt; {script.alternatives.length} alternative{script.alternatives.length > 1 ? "s" : ""} available
             </p>
           )}
         </a>
@@ -128,8 +129,8 @@ try {
     </div>
 
     {scripts.length === 0 && (
-      <div class="text-center py-16">
-        <p class="text-zinc-400">No scripts found</p>
+      <div class="text-center py-16 border border-cyber-light bg-cyber-darker">
+        <p class="text-gray-500 font-mono">// No scripts found matching query</p>
       </div>
     )}
   </div>

@@ -65,31 +65,32 @@ const categories = [
 <AdminLayout title="Patterns">
   <div class="flex items-center justify-between mb-8">
     <div>
-      <h1 class="text-3xl font-bold mb-2">Script Patterns</h1>
-      <p class="text-zinc-400">Manage third-party script detection patterns</p>
+      <span class="text-xs text-gray-600 uppercase tracking-[0.3em] font-mono">// pattern management</span>
+      <h1 class="text-3xl font-bold mt-2 text-neon-orange">Script Patterns</h1>
+      <p class="text-gray-500 font-mono text-sm mt-1">Manage third-party script detection patterns</p>
     </div>
-    <a href="/admin/patterns/new" class="btn-primary">
+    <a href="/admin/patterns/new" class="bg-neon-orange text-cyber-black font-bold px-6 py-2.5 uppercase tracking-wider border border-neon-orange hover:shadow-neon-orange transition-all duration-200">
       Add Pattern
     </a>
   </div>
 
   <!-- Filters -->
-  <div class="card mb-6">
+  <div class="bg-cyber-darker border border-cyber-light p-4 mb-6">
     <form method="get" class="flex gap-4 items-end">
       <div class="flex-1">
-        <label for="search" class="block text-sm font-medium text-zinc-400 mb-1">Search</label>
+        <label for="search" class="block text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">Search</label>
         <input
           type="text"
           id="search"
           name="search"
           value={search}
           placeholder="Search by name or vendor..."
-          class="input w-full"
+          class="w-full bg-cyber-dark border border-cyber-light px-4 py-2 text-gray-100 placeholder:text-gray-600 focus:outline-none focus:border-neon-cyan focus:shadow-neon-cyan transition-all duration-200 font-mono"
         />
       </div>
       <div class="w-48">
-        <label for="category" class="block text-sm font-medium text-zinc-400 mb-1">Category</label>
-        <select id="category" name="category" class="input w-full">
+        <label for="category" class="block text-xs font-medium text-gray-500 mb-2 uppercase tracking-wider">Category</label>
+        <select id="category" name="category" class="w-full bg-cyber-dark border border-cyber-light px-4 py-2 text-gray-100 focus:outline-none focus:border-neon-cyan transition-all duration-200">
           <option value="">All categories</option>
           {categories.map((cat) => (
             <option value={cat} selected={category === cat}>
@@ -98,55 +99,61 @@ const categories = [
           ))}
         </select>
       </div>
-      <button type="submit" class="btn-secondary">Filter</button>
+      <button type="submit" class="bg-transparent text-neon-cyan font-medium px-4 py-2 border border-neon-cyan/50 hover:border-neon-cyan hover:shadow-neon-cyan hover:bg-neon-cyan/10 transition-all duration-200 uppercase tracking-wide text-sm">
+        Filter
+      </button>
       {(search || category) && (
-        <a href="/admin/patterns" class="btn-secondary">Clear</a>
+        <a href="/admin/patterns" class="bg-transparent text-gray-400 font-medium px-4 py-2 border border-cyber-light hover:text-neon-orange hover:border-neon-orange/50 transition-all duration-200 uppercase tracking-wide text-sm">
+          Clear
+        </a>
       )}
     </form>
   </div>
 
   {error ? (
-    <div class="card bg-red-900/20 border-red-800">
-      <p class="text-red-400">{error}</p>
+    <div class="bg-cyber-darker border border-neon-red p-4">
+      <p class="text-neon-red font-mono">// ERROR: {error}</p>
     </div>
   ) : patterns.length === 0 ? (
-    <div class="card text-center py-12">
-      <p class="text-zinc-400 mb-4">No patterns found</p>
-      <a href="/admin/patterns/new" class="btn-primary">Add your first pattern</a>
+    <div class="bg-cyber-darker border border-cyber-light text-center py-12">
+      <p class="text-gray-500 mb-4 font-mono">// No patterns found</p>
+      <a href="/admin/patterns/new" class="inline-block bg-neon-orange text-cyber-black font-bold px-6 py-2.5 uppercase tracking-wider border border-neon-orange hover:shadow-neon-orange transition-all duration-200">
+        Add your first pattern
+      </a>
     </div>
   ) : (
     <>
-      <div class="card overflow-hidden p-0">
+      <div class="bg-cyber-darker border border-cyber-light overflow-hidden">
         <table class="w-full">
-          <thead class="bg-zinc-800">
+          <thead class="bg-cyber-dark border-b border-cyber-light">
             <tr>
-              <th class="text-left px-4 py-3 text-sm font-medium text-zinc-400">Name</th>
-              <th class="text-left px-4 py-3 text-sm font-medium text-zinc-400">Vendor</th>
-              <th class="text-left px-4 py-3 text-sm font-medium text-zinc-400">Category</th>
-              <th class="text-left px-4 py-3 text-sm font-medium text-zinc-400">Patterns</th>
+              <th class="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+              <th class="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Vendor</th>
+              <th class="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Category</th>
+              <th class="text-left px-4 py-3 text-xs font-medium text-gray-500 uppercase tracking-wider">Patterns</th>
               <th class="px-4 py-3"></th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-zinc-800">
+          <tbody class="divide-y divide-cyber-light/50">
             {patterns.map((pattern) => (
-              <tr class="hover:bg-zinc-800/50">
+              <tr class="hover:bg-cyber-dark/50 transition-colors">
                 <td class="px-4 py-3">
-                  <span class="font-medium">{pattern.name}</span>
-                  <span class="block text-xs text-zinc-500 font-mono">{pattern.id}</span>
+                  <span class="font-medium text-gray-100">{pattern.name}</span>
+                  <span class="block text-xs text-gray-600 font-mono mt-0.5">{pattern.id}</span>
                 </td>
-                <td class="px-4 py-3 text-zinc-400">{pattern.vendor}</td>
+                <td class="px-4 py-3 text-gray-400 font-mono text-sm">{pattern.vendor}</td>
                 <td class="px-4 py-3">
-                  <span class="inline-block px-2 py-1 text-xs rounded bg-zinc-800 text-zinc-300">
+                  <span class="inline-block px-2 py-1 text-xs border border-neon-cyan/50 text-neon-cyan uppercase tracking-wide">
                     {pattern.category}
                   </span>
                 </td>
-                <td class="px-4 py-3 text-zinc-500 text-sm">
+                <td class="px-4 py-3 text-gray-500 text-sm font-mono">
                   {pattern.urlPatterns?.length ?? 0} pattern(s)
                 </td>
                 <td class="px-4 py-3 text-right">
                   <a
                     href={`/admin/patterns/${pattern.id}/edit`}
-                    class="text-blue-400 hover:text-blue-300 text-sm"
+                    class="text-neon-amber hover:text-neon-orange text-sm uppercase tracking-wide transition-colors"
                   >
                     Edit
                   </a>
@@ -160,14 +167,14 @@ const categories = [
       <!-- Pagination -->
       {totalPages > 1 && (
         <div class="flex items-center justify-between mt-4">
-          <p class="text-sm text-zinc-500">
-            Showing {offset + 1} to {Math.min(offset + limit, total)} of {total} patterns
+          <p class="text-sm text-gray-600 font-mono">
+            // Showing {offset + 1} to {Math.min(offset + limit, total)} of {total} patterns
           </p>
           <div class="flex gap-2">
             {page > 1 && (
               <a
                 href={`/admin/patterns?page=${page - 1}${category ? `&category=${category}` : ""}${search ? `&search=${search}` : ""}`}
-                class="btn-secondary text-sm"
+                class="bg-transparent text-gray-400 font-medium px-4 py-2 border border-cyber-light hover:text-neon-cyan hover:border-neon-cyan/50 transition-all duration-200 uppercase tracking-wide text-sm"
               >
                 Previous
               </a>
@@ -175,7 +182,7 @@ const categories = [
             {page < totalPages && (
               <a
                 href={`/admin/patterns?page=${page + 1}${category ? `&category=${category}` : ""}${search ? `&search=${search}` : ""}`}
-                class="btn-secondary text-sm"
+                class="bg-transparent text-gray-400 font-medium px-4 py-2 border border-cyber-light hover:text-neon-cyan hover:border-neon-cyan/50 transition-all duration-200 uppercase tracking-wide text-sm"
               >
                 Next
               </a>

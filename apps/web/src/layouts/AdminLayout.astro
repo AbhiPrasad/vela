@@ -29,82 +29,102 @@ if (user?.role === "admin") {
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700&display=swap"
       rel="stylesheet"
     />
-    <title>{title} | Vela Admin</title>
+    <title>{title} | VELA Admin</title>
   </head>
-  <body class="min-h-screen bg-zinc-950 text-zinc-100 antialiased">
+  <body class="min-h-screen bg-cyber-black text-gray-100 antialiased">
     <div class="flex min-h-screen">
       <!-- Sidebar -->
-      <aside class="w-64 bg-zinc-900 border-r border-zinc-800 flex flex-col">
-        <div class="p-4 border-b border-zinc-800">
-          <a href="/" class="flex items-center gap-2 text-xl font-bold">
-            <span class="text-2xl">🔍</span>
-            <span>Vela</span>
+      <aside class="w-64 bg-cyber-darker border-r border-cyber-light flex flex-col">
+        <!-- Logo -->
+        <div class="p-4 border-b border-cyber-light">
+          <a href="/" class="flex items-center gap-3 group">
+            <div class="w-8 h-8 border-2 border-neon-orange flex items-center justify-center text-neon-orange font-bold text-sm group-hover:shadow-neon-orange transition-all duration-200">
+              V
+            </div>
+            <span class="text-xl font-bold tracking-wider text-neon-orange">VELA</span>
           </a>
-          <span class="text-xs text-zinc-500 mt-1 block">Admin Panel</span>
+          <span class="text-xs text-gray-600 mt-2 block uppercase tracking-widest">// Admin Panel</span>
         </div>
 
+        <!-- Navigation -->
         <nav class="flex-1 p-4">
+          <div class="text-xs text-gray-600 uppercase tracking-widest mb-3 px-3">Navigation</div>
           <ul class="space-y-1">
-            {navItems.map((item) => (
-              <li>
-                <a
-                  href={item.href}
-                  class:list={[
-                    "flex items-center gap-3 px-3 py-2 rounded-md transition-colors",
-                    currentPath === item.href || (item.href !== "/admin" && currentPath.startsWith(item.href))
-                      ? "bg-zinc-800 text-white"
-                      : "text-zinc-400 hover:bg-zinc-800 hover:text-white",
-                  ]}
-                >
-                  {item.icon === "dashboard" && (
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/>
-                    </svg>
-                  )}
-                  {item.icon === "patterns" && (
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
-                    </svg>
-                  )}
-                  {item.icon === "users" && (
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
-                    </svg>
-                  )}
-                  {item.label}
-                </a>
-              </li>
-            ))}
+            {navItems.map((item) => {
+              const isActive = currentPath === item.href || (item.href !== "/admin" && currentPath.startsWith(item.href));
+              return (
+                <li>
+                  <a
+                    href={item.href}
+                    class:list={[
+                      "flex items-center gap-3 px-3 py-2.5 transition-all duration-200 border-l-2",
+                      isActive
+                        ? "bg-neon-orange/10 text-neon-orange border-neon-orange"
+                        : "text-gray-400 border-transparent hover:bg-cyber-dark hover:text-neon-cyan hover:border-neon-cyan/50",
+                    ]}
+                  >
+                    {item.icon === "dashboard" && (
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 5a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM14 5a1 1 0 011-1h4a1 1 0 011 1v2a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zM14 12a1 1 0 011-1h4a1 1 0 011 1v7a1 1 0 01-1 1h-4a1 1 0 01-1-1v-7z"/>
+                      </svg>
+                    )}
+                    {item.icon === "patterns" && (
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+                      </svg>
+                    )}
+                    {item.icon === "users" && (
+                      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+                      </svg>
+                    )}
+                    <span class="text-sm uppercase tracking-wide">{item.label}</span>
+                  </a>
+                </li>
+              );
+            })}
           </ul>
         </nav>
 
-        <div class="p-4 border-t border-zinc-800">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-8 h-8 bg-zinc-700 rounded-full flex items-center justify-center text-sm">
+        <!-- User section -->
+        <div class="p-4 border-t border-cyber-light">
+          <div class="flex items-center gap-3 mb-4">
+            <div class="w-10 h-10 bg-cyber-dark border border-neon-cyan/30 flex items-center justify-center text-neon-cyan text-sm font-bold">
               {user?.name?.charAt(0).toUpperCase() ?? user?.email?.charAt(0).toUpperCase()}
             </div>
             <div class="flex-1 min-w-0">
-              <p class="text-sm font-medium truncate">{user?.name ?? user?.email}</p>
-              <p class="text-xs text-zinc-500 capitalize">{user?.role}</p>
+              <p class="text-sm font-medium truncate text-gray-200">{user?.name ?? user?.email}</p>
+              <p class="text-xs text-neon-orange uppercase tracking-wider">{user?.role}</p>
             </div>
           </div>
-          <a
-            href="/auth/logout"
-            class="flex items-center gap-2 text-sm text-zinc-400 hover:text-white transition-colors"
-          >
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-            </svg>
-            Sign out
-          </a>
+          <div class="flex gap-2">
+            <a
+              href="/"
+              class="flex-1 flex items-center justify-center gap-2 text-xs text-gray-500 hover:text-neon-cyan transition-all duration-200 px-2 py-2 border border-cyber-light hover:border-neon-cyan/30"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/>
+              </svg>
+              Site
+            </a>
+            <a
+              href="/auth/logout"
+              class="flex-1 flex items-center justify-center gap-2 text-xs text-gray-500 hover:text-neon-pink transition-all duration-200 px-2 py-2 border border-cyber-light hover:border-neon-pink/30"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+              </svg>
+              Exit
+            </a>
+          </div>
         </div>
       </aside>
 
       <!-- Main content -->
-      <main class="flex-1 overflow-auto">
+      <main class="flex-1 overflow-auto bg-cyber-black">
         <div class="p-8">
           <slot />
         </div>
