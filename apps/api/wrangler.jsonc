@@ -10,7 +10,8 @@
     {
       "binding": "DB",
       "database_name": "vela-db",
-      "database_id": "YOUR_D1_DATABASE_ID"
+      "database_id": "YOUR_D1_DATABASE_ID",
+      "migrations_dir": "../../migrations"
     }
   ],
 
@@ -34,11 +35,10 @@
   // Environment variables
   "vars": {
     "ENVIRONMENT": "development",
-    "BETTER_AUTH_URL": "http://localhost:8787"
+    "BETTER_AUTH_URL": "http://localhost:8787",
+    "WEB_URL": "http://localhost:4321"
   }
 
-  // Note: The following secrets should be set via `wrangler secret put`:
-  // - BETTER_AUTH_SECRET (required): Generate with `openssl rand -base64 32`
-  // - GITHUB_CLIENT_ID (optional): For GitHub OAuth
-  // - GITHUB_CLIENT_SECRET (optional): For GitHub OAuth
+  // Note: Set BETTER_AUTH_SECRET via `wrangler secret put BETTER_AUTH_SECRET`
+  // Generate with: openssl rand -base64 32
 }

@@ -33,6 +33,9 @@ pnpm patterns add --id <id> ...          # Add new pattern
 pnpm patterns seed                       # Seed test patterns (GA4, Facebook Pixel)
 pnpm patterns export                     # Export patterns to JSON
 pnpm patterns import --file <file>       # Import patterns from JSON
+
+# Admin user management
+pnpm admin:seed --email <email> --password <password> [--name <name>]  # Create admin user (requires dev server running)
 ```
 
 ## Architecture
@@ -60,7 +63,7 @@ apps/web ──→ better-auth/client ────────→ @vela/shared
 - Cloudflare KV for caching and rate limiting
 - Cloudflare Browser Rendering (Puppeteer) for page scanning
 - Drizzle ORM for type-safe database queries
-- better-auth for authentication (email/password + GitHub OAuth)
+- better-auth for authentication (email/password)
 
 ## Key Files
 
@@ -85,8 +88,7 @@ apps/web ──→ better-auth/client ────────→ @vela/shared
 - `middleware.ts` - Astro middleware for route protection
 - `layouts/BaseLayout.astro` - Public layout with auth-aware nav
 - `layouts/AdminLayout.astro` - Admin panel layout with sidebar
-- `pages/auth/login.astro` - Login page (email + GitHub OAuth)
-- `pages/auth/signup.astro` - Registration page
+- `pages/auth/login.astro` - Login page (email/password)
 - `pages/admin/index.astro` - Admin dashboard
 - `pages/admin/patterns/` - Pattern list, add, edit pages
 - `pages/admin/users/` - User management (admin only)
@@ -105,8 +107,7 @@ The API worker (`apps/api/wrangler.jsonc`) uses:
 
 **Required Secrets (set via `wrangler secret put`):**
 - `BETTER_AUTH_SECRET` - Auth encryption key (generate with `openssl rand -base64 32`)
-- `GITHUB_CLIENT_ID` - GitHub OAuth client ID (optional)
-- `GITHUB_CLIENT_SECRET` - GitHub OAuth client secret (optional)
+- `WEB_URL` - Frontend URL for production (e.g., `https://vela.example.com`)
 
 ## Authentication & Authorization
 
@@ -120,9 +121,7 @@ The API worker (`apps/api/wrangler.jsonc`) uses:
 - `/admin/users/*` - Requires admin role only
 
 **API Endpoints:**
-- `POST /api/auth/sign-up/email` - Register with email/password
 - `POST /api/auth/sign-in/email` - Login with email/password
-- `GET /api/auth/sign-in/social?provider=github` - GitHub OAuth
 - `POST /api/auth/sign-out` - Logout
 - `GET /api/auth/get-session` - Get current session
 

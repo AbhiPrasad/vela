@@ -9,10 +9,11 @@
     "typecheck": "turbo typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,astro,json,md}\"",
     "format:check": "prettier --check \"**/*.{ts,tsx,astro,json,md}\"",
-    "db:migrate:local": "npx wrangler d1 migrations apply vela-db --local",
-    "db:migrate:remote": "npx wrangler d1 migrations apply vela-db",
+    "db:migrate:local": "npx wrangler d1 migrations apply vela-db --local -c apps/api/wrangler.jsonc",
+    "db:migrate:remote": "npx wrangler d1 migrations apply vela-db -c apps/api/wrangler.jsonc",
     "patterns": "tsx scripts/manage-patterns.ts",
-    "patterns:seed": "tsx scripts/manage-patterns.ts seed --local"
+    "patterns:seed": "tsx scripts/manage-patterns.ts seed --local",
+    "admin:seed": "tsx scripts/seed-admin.ts"
   },
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",

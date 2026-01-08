@@ -21,8 +21,7 @@ export interface Env {
   // Auth configuration
   BETTER_AUTH_SECRET: string;
   BETTER_AUTH_URL: string;
-  GITHUB_CLIENT_ID?: string;
-  GITHUB_CLIENT_SECRET?: string;
+  WEB_URL?: string; // Frontend URL for trusted origins (e.g., http://localhost:4321)
 }
 
 /**

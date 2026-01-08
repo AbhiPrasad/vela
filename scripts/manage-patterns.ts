@@ -22,7 +22,7 @@ const program = new Command();
 function runD1Query(sql: string, isLocal: boolean): string {
   const localFlag = isLocal ? "--local" : "";
   const escapedSql = sql.replace(/'/g, "'\\''");
-  const cmd = `npx wrangler d1 execute vela-db ${localFlag} --command '${escapedSql}' --json`;
+  const cmd = `npx wrangler d1 execute vela-db ${localFlag} -c apps/api/wrangler.jsonc --command '${escapedSql}' --json`;
 
   try {
     const result = execSync(cmd, { encoding: "utf-8", cwd: process.cwd() });
@@ -249,7 +249,7 @@ program
   .option("-l, --local", "Use local D1 database", true)
   .action((options) => {
     const localFlag = options.local ? "--local" : "";
-    const cmd = `npx wrangler d1 execute vela-db ${localFlag} --file=scripts/seed-patterns.sql`;
+    const cmd = `npx wrangler d1 execute vela-db ${localFlag} -c apps/api/wrangler.jsonc --file=scripts/seed-patterns.sql`;
 
     try {
       execSync(cmd, { encoding: "utf-8", stdio: "inherit", cwd: process.cwd() });

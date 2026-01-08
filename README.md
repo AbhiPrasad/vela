@@ -10,7 +10,7 @@ A third-party script auditor that analyzes websites to identify tracking scripts
 - Detect privacy concerns (cookies, fingerprinting, data collection)
 - Grade overall script health
 - **Admin panel** for managing script patterns
-- **Authentication** with email/password and GitHub OAuth
+- **Authentication** with email/password
 - **Role-based access control** (user, editor, admin)
 
 ## Tech Stack
@@ -19,7 +19,7 @@ A third-party script auditor that analyzes websites to identify tracking scripts
 - **API**: [Hono](https://hono.dev/) (lightweight, edge-compatible)
 - **Frontend**: [Astro](https://astro.build/) + Tailwind CSS
 - **Database**: Cloudflare D1 (SQLite) with [Drizzle ORM](https://orm.drizzle.team/)
-- **Authentication**: [better-auth](https://www.better-auth.com/) (email/password + OAuth)
+- **Authentication**: [better-auth](https://www.better-auth.com/) (email/password)
 - **Caching**: Cloudflare KV
 - **Browser Automation**: Cloudflare Browser Rendering (Puppeteer)
 - **Monorepo**: [Turborepo](https://turbo.build/) + pnpm workspaces
@@ -94,11 +94,11 @@ vela/
 
 6. **Create an admin account**
 
-   - Visit http://localhost:4321/auth/signup
-   - After signing up, manually update your role in the database:
-     ```bash
-     npx wrangler d1 execute vela-db --local --command "UPDATE users SET role='admin' WHERE email='your@email.com'"
-     ```
+   ```bash
+   pnpm admin:seed --email admin@example.com --password your-password --name "Admin"
+   ```
+
+   Note: The dev server must be running (`pnpm dev`) for this command to work.
 
 ## Commands
 
@@ -113,6 +113,7 @@ vela/
 | `pnpm db:migrate:remote` | Apply migrations to production |
 | `pnpm patterns` | Pattern management CLI |
 | `pnpm patterns:seed` | Seed test patterns |
+| `pnpm admin:seed` | Create an admin user |
 
 ### Per-App Commands
 
@@ -148,8 +149,7 @@ pnpm patterns seed                       # Seed test patterns
 - `admin` - Full access including user management
 
 **Auth Methods:**
-- Email/password registration and login
-- GitHub OAuth (requires `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`)
+- Email/password login (admin users created via CLI)
 
 ## API Endpoints
 
@@ -161,9 +161,7 @@ pnpm patterns seed                       # Seed test patterns
 - `POST /scripts/identify` - Identify a script URL
 
 ### Auth (`/api/auth/*`)
-- `POST /api/auth/sign-up/email` - Register
 - `POST /api/auth/sign-in/email` - Login
-- `GET /api/auth/sign-in/social?provider=github` - OAuth
 - `POST /api/auth/sign-out` - Logout
 - `GET /api/auth/get-session` - Current session
 
@@ -186,9 +184,8 @@ The API worker uses:
 
 **Required Secrets:**
 ```bash
-wrangler secret put BETTER_AUTH_SECRET    # Required
-wrangler secret put GITHUB_CLIENT_ID      # Optional (for OAuth)
-wrangler secret put GITHUB_CLIENT_SECRET  # Optional (for OAuth)
+wrangler secret put BETTER_AUTH_SECRET    # Required - generate with: openssl rand -base64 32
+wrangler secret put WEB_URL               # Required for production - your frontend URL (e.g., https://vela.example.com)
 ```
 
 ## License

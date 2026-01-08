@@ -26,6 +26,6 @@
     "@vela/typescript-config": "workspace:*",
     "drizzle-kit": "^0.31.8",
     "typescript": "^5.4.0",
-    "wrangler": "^3.57.0"
+    "wrangler": "^4.58.0"
   }
 }

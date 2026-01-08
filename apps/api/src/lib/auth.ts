@@ -7,23 +7,35 @@ import type { Env } from "../types.js";
 export function createAuth(env: Env) {
   const db = drizzle(env.DB, { schema });
 
+  // Build trusted origins list
+  const trustedOrigins: string[] = [];
+  // In development, trust common localhost ports
+  if (env.ENVIRONMENT === "development") {
+    trustedOrigins.push(
+      "http://localhost:4321",
+      "http://localhost:4322",
+      "http://localhost:4323",
+      "http://localhost:8787"
+    );
+  }
+  // Always trust explicitly configured origins
+  if (env.WEB_URL) {
+    trustedOrigins.push(env.WEB_URL);
+  }
+  if (env.BETTER_AUTH_URL) {
+    trustedOrigins.push(env.BETTER_AUTH_URL);
+  }
+
   return betterAuth({
     database: drizzleAdapter(db, {
       provider: "sqlite",
-      usePlural: false,
+      usePlural: true,
     }),
     baseURL: env.BETTER_AUTH_URL,
     secret: env.BETTER_AUTH_SECRET,
+    trustedOrigins,
     emailAndPassword: {
       enabled: true,
-    },
-    socialProviders: {
-      github: env.GITHUB_CLIENT_ID && env.GITHUB_CLIENT_SECRET
-        ? {
-            clientId: env.GITHUB_CLIENT_ID,
-            clientSecret: env.GITHUB_CLIENT_SECRET,
-          }
-        : undefined,
     },
     user: {
       additionalFields: {
