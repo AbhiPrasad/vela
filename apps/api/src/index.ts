@@ -7,6 +7,8 @@ import type { Env, Variables } from "./types.js";
 import { scansRouter } from "./routes/scans.js";
 import { scriptsRouter } from "./routes/scripts.js";
 import { healthRouter } from "./routes/health.js";
+import { authRouter } from "./routes/auth.js";
+import { adminRouter } from "./routes/admin/index.js";
 
 const app = new Hono<{ Bindings: Env; Variables: Variables }>();
 
@@ -17,17 +19,30 @@ app.use("*", secureHeaders());
 app.use(
   "*",
   cors({
-    origin: "*",
-    allowMethods: ["GET", "POST", "OPTIONS"],
+    origin: (origin) => {
+      // Allow localhost for development
+      if (origin?.includes("localhost") || origin?.includes("127.0.0.1")) {
+        return origin;
+      }
+      // Allow production domains
+      if (origin?.includes("vela.")) {
+        return origin;
+      }
+      return null;
+    },
+    allowMethods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
     maxAge: 86400,
   })
 );
 
-// Request ID middleware
+// Request ID and initial context middleware
 app.use("*", async (c, next) => {
   const requestId = crypto.randomUUID();
   c.set("requestId", requestId);
+  c.set("user", null);
+  c.set("session", null);
   c.header("X-Request-Id", requestId);
   await next();
 });
@@ -36,6 +51,8 @@ app.use("*", async (c, next) => {
 app.route("/health", healthRouter);
 app.route("/scans", scansRouter);
 app.route("/scripts", scriptsRouter);
+app.route("/api/auth", authRouter);
+app.route("/admin", adminRouter);
 
 // Root endpoint
 app.get("/", (c) => {
@@ -47,6 +64,8 @@ app.get("/", (c) => {
       health: "/health",
       scans: "/scans",
       scripts: "/scripts",
+      auth: "/api/auth/*",
+      admin: "/admin/*",
     },
   });
 });

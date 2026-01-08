@@ -9,13 +9,17 @@ A third-party script auditor that analyzes websites to identify tracking scripts
 - Analyze performance impact of each script
 - Detect privacy concerns (cookies, fingerprinting, data collection)
 - Grade overall script health
+- **Admin panel** for managing script patterns
+- **Authentication** with email/password and GitHub OAuth
+- **Role-based access control** (user, editor, admin)
 
 ## Tech Stack
 
 - **Runtime**: Cloudflare Workers + Pages
 - **API**: [Hono](https://hono.dev/) (lightweight, edge-compatible)
 - **Frontend**: [Astro](https://astro.build/) + Tailwind CSS
-- **Database**: Cloudflare D1 (SQLite)
+- **Database**: Cloudflare D1 (SQLite) with [Drizzle ORM](https://orm.drizzle.team/)
+- **Authentication**: [better-auth](https://www.better-auth.com/) (email/password + OAuth)
 - **Caching**: Cloudflare KV
 - **Browser Automation**: Cloudflare Browser Rendering (Puppeteer)
 - **Monorepo**: [Turborepo](https://turbo.build/) + pnpm workspaces
@@ -26,12 +30,24 @@ A third-party script auditor that analyzes websites to identify tracking scripts
 vela/
 ├── apps/
 │   ├── api/          # Hono REST API (Cloudflare Workers)
+│   │   └── src/
+│   │       ├── db/           # Drizzle schema & client
+│   │       ├── lib/          # Auth configuration
+│   │       ├── middleware/   # Auth middleware
+│   │       ├── routes/       # API routes (scans, scripts, auth, admin)
+│   │       ├── services/     # Business logic (scan, pattern, browser)
+│   │       └── utils/        # URL utilities
 │   └── web/          # Astro frontend (Cloudflare Pages)
+│       └── src/
+│           ├── layouts/      # Base & Admin layouts
+│           ├── lib/          # Auth client
+│           └── pages/        # Public, auth, and admin pages
 ├── packages/
 │   ├── shared/       # Shared TypeScript types
-│   ├── script-db/    # Script pattern database & matching
+│   ├── script-db/    # Script pattern database (legacy)
 │   └── typescript-config/  # Shared tsconfig presets
-└── migrations/       # D1 database migrations
+├── migrations/       # D1 database migrations
+└── scripts/          # CLI tools (pattern management)
 ```
 
 ## Prerequisites
@@ -50,16 +66,39 @@ vela/
 2. **Set up local database**
 
    ```bash
-   npx wrangler d1 migrations apply vela-db --local
+   pnpm db:migrate:local
    ```
 
-3. **Start development servers**
+3. **Seed test patterns** (optional)
+
+   ```bash
+   pnpm patterns:seed
+   ```
+
+4. **Set auth secret** (for local development, create `.dev.vars` in `apps/api/`)
+
+   ```bash
+   # apps/api/.dev.vars
+   BETTER_AUTH_SECRET=your-secret-key-here
+   ```
+
+   Generate a secret with: `openssl rand -base64 32`
+
+5. **Start development servers**
 
    ```bash
    pnpm dev
    ```
 
-   This starts both the API worker and web frontend in development mode.
+   This starts both the API worker (http://localhost:8787) and web frontend (http://localhost:4321).
+
+6. **Create an admin account**
+
+   - Visit http://localhost:4321/auth/signup
+   - After signing up, manually update your role in the database:
+     ```bash
+     npx wrangler d1 execute vela-db --local --command "UPDATE users SET role='admin' WHERE email='your@email.com'"
+     ```
 
 ## Commands
 
@@ -70,6 +109,10 @@ vela/
 | `pnpm typecheck` | Type check entire monorepo |
 | `pnpm lint` | Lint with oxlint |
 | `pnpm format` | Format with Prettier |
+| `pnpm db:migrate:local` | Apply migrations locally |
+| `pnpm db:migrate:remote` | Apply migrations to production |
+| `pnpm patterns` | Pattern management CLI |
+| `pnpm patterns:seed` | Seed test patterns |
 
 ### Per-App Commands
 
@@ -85,33 +128,68 @@ pnpm dev        # Start Astro dev server
 pnpm deploy     # Deploy to Cloudflare Pages
 ```
 
-### Database Migrations
+### Pattern Management CLI
 
 ```bash
-# Apply migrations locally
-npx wrangler d1 migrations apply vela-db --local
-
-# Apply migrations to production
-npx wrangler d1 migrations apply vela-db
+pnpm patterns list [--category <cat>]    # List all patterns
+pnpm patterns get <id>                   # Get pattern details
+pnpm patterns add --id <id> --name "..." --vendor "..." --category "..." --url-patterns "..."
+pnpm patterns delete <id>                # Soft delete
+pnpm patterns export                     # Export to JSON
+pnpm patterns import --file <file>       # Import from JSON
+pnpm patterns seed                       # Seed test patterns
 ```
 
-## Architecture
+## Authentication & Roles
 
-### Dependency Flow
+**Roles:**
+- `user` - Default role, public access only
+- `editor` - Can manage script patterns (CRUD operations)
+- `admin` - Full access including user management
 
-```
-apps/api ──→ @vela/script-db ──→ @vela/shared
-apps/web ──────────────────────→ @vela/shared
-```
+**Auth Methods:**
+- Email/password registration and login
+- GitHub OAuth (requires `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET`)
 
-### Cloudflare Bindings
+## API Endpoints
 
-The API worker uses the following Cloudflare bindings:
+### Public
+- `GET /health` - Health check
+- `POST /scans` - Create a new scan
+- `GET /scans/:id` - Get scan results
+- `GET /scripts` - List known script patterns
+- `POST /scripts/identify` - Identify a script URL
 
-- `DB` - D1 database for scans and known scripts
+### Auth (`/api/auth/*`)
+- `POST /api/auth/sign-up/email` - Register
+- `POST /api/auth/sign-in/email` - Login
+- `GET /api/auth/sign-in/social?provider=github` - OAuth
+- `POST /api/auth/sign-out` - Logout
+- `GET /api/auth/get-session` - Current session
+
+### Admin (`/admin/*` - requires auth)
+- `GET /admin/patterns` - List patterns (editor+)
+- `POST /admin/patterns` - Create pattern (editor+)
+- `PUT /admin/patterns/:id` - Update pattern (editor+)
+- `DELETE /admin/patterns/:id` - Delete pattern (editor+)
+- `GET /admin/users` - List users (admin only)
+- `PUT /admin/users/:id/role` - Update user role (admin only)
+- `DELETE /admin/users/:id` - Delete user (admin only)
+
+## Cloudflare Bindings
+
+The API worker uses:
+- `DB` - D1 database for scans, patterns, and auth
 - `SCAN_CACHE` - KV namespace for result caching
 - `RATE_LIMIT` - KV namespace for rate limiting
 - `BROWSER` - Browser Rendering binding for Puppeteer
+
+**Required Secrets:**
+```bash
+wrangler secret put BETTER_AUTH_SECRET    # Required
+wrangler secret put GITHUB_CLIENT_ID      # Optional (for OAuth)
+wrangler secret put GITHUB_CLIENT_SECRET  # Optional (for OAuth)
+```
 
 ## License
 

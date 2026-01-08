@@ -1,14 +1,8 @@
 import { Hono } from "hono";
 import type { Env, Variables } from "../types.js";
 import type { ScriptCategory } from "@vela/shared";
-import {
-  allPatterns,
-  getPatternById,
-  getPatternsByCategory,
-  getPatternsByVendor,
-  searchPatterns,
-  matchUrl,
-} from "@vela/script-db";
+import { PatternService } from "../services/pattern.js";
+import { createDb } from "../db/index.js";
 
 export const scriptsRouter = new Hono<{
   Bindings: Env;
@@ -18,30 +12,34 @@ export const scriptsRouter = new Hono<{
 /**
  * GET /scripts - List all known scripts with optional filtering
  */
-scriptsRouter.get("/", (c) => {
+scriptsRouter.get("/", async (c) => {
   const category = c.req.query("category") as ScriptCategory | undefined;
   const vendor = c.req.query("vendor");
   const search = c.req.query("search");
   const limit = Math.min(parseInt(c.req.query("limit") ?? "50"), 100);
   const offset = parseInt(c.req.query("offset") ?? "0");
 
-  let patterns = allPatterns;
+  const db = createDb(c.env.DB);
+  const patternService = new PatternService(db);
 
-  // Apply filters
-  if (category) {
-    patterns = getPatternsByCategory(category);
-  } else if (vendor) {
-    patterns = getPatternsByVendor(vendor);
-  } else if (search) {
-    patterns = searchPatterns(search);
-  }
+  const patterns = await patternService.getAllPatterns({
+    category,
+    vendor,
+    search,
+    limit,
+    offset,
+  });
 
-  // Apply pagination
-  const total = patterns.length;
-  const paginatedPatterns = patterns.slice(offset, offset + limit);
+  // Get total count for pagination (without limit/offset)
+  const allPatterns = await patternService.getAllPatterns({
+    category,
+    vendor,
+    search,
+  });
+  const total = allPatterns.length;
 
   return c.json({
-    scripts: paginatedPatterns,
+    scripts: patterns,
     pagination: {
       total,
       limit,
@@ -54,8 +52,14 @@ scriptsRouter.get("/", (c) => {
 /**
  * GET /scripts/categories - List available categories
  */
-scriptsRouter.get("/categories", (c) => {
-  const categories: ScriptCategory[] = [
+scriptsRouter.get("/categories", async (c) => {
+  const db = createDb(c.env.DB);
+  const patternService = new PatternService(db);
+
+  const categories = await patternService.getCategories();
+
+  // Ensure all standard categories are included
+  const standardCategories: ScriptCategory[] = [
     "analytics",
     "advertising",
     "social",
@@ -68,30 +72,26 @@ scriptsRouter.get("/categories", (c) => {
     "other",
   ];
 
-  const categoryCounts = categories.map((category) => ({
+  const categoryMap = new Map(categories.map((c) => [c.category, c.count]));
+  const result = standardCategories.map((category) => ({
     category,
-    count: getPatternsByCategory(category).length,
+    count: categoryMap.get(category) ?? 0,
   }));
 
   return c.json({
-    categories: categoryCounts,
+    categories: result,
   });
 });
 
 /**
  * GET /scripts/vendors - List all vendors
  */
-scriptsRouter.get("/vendors", (c) => {
-  const vendorMap = new Map<string, number>();
+scriptsRouter.get("/vendors", async (c) => {
+  const db = createDb(c.env.DB);
+  const patternService = new PatternService(db);
 
-  for (const pattern of allPatterns) {
-    const count = vendorMap.get(pattern.vendor) ?? 0;
-    vendorMap.set(pattern.vendor, count + 1);
-  }
-
-  const vendors = Array.from(vendorMap.entries())
-    .map(([vendor, count]) => ({ vendor, count }))
-    .sort((a, b) => b.count - a.count);
+  const vendors = await patternService.getVendors();
+  vendors.sort((a, b) => b.count - a.count);
 
   return c.json({ vendors });
 });
@@ -99,9 +99,13 @@ scriptsRouter.get("/vendors", (c) => {
 /**
  * GET /scripts/:id - Get a specific script pattern
  */
-scriptsRouter.get("/:id", (c) => {
+scriptsRouter.get("/:id", async (c) => {
   const scriptId = c.req.param("id");
-  const pattern = getPatternById(scriptId);
+
+  const db = createDb(c.env.DB);
+  const patternService = new PatternService(db);
+
+  const pattern = await patternService.getPatternById(scriptId);
 
   if (!pattern) {
     return c.json({ error: "Script pattern not found" }, 404);
@@ -120,7 +124,10 @@ scriptsRouter.post("/identify", async (c) => {
     return c.json({ error: "URL is required" }, 400);
   }
 
-  const result = matchUrl(body.url);
+  const db = createDb(c.env.DB);
+  const patternService = new PatternService(db);
+
+  const result = await patternService.matchUrl(body.url);
 
   if (!result.pattern) {
     return c.json({
@@ -151,8 +158,13 @@ scriptsRouter.post("/identify-batch", async (c) => {
     return c.json({ error: "Maximum 100 URLs allowed per request" }, 400);
   }
 
+  const db = createDb(c.env.DB);
+  const patternService = new PatternService(db);
+
+  const matchResults = await patternService.matchUrls(body.urls);
+
   const results = body.urls.map((url) => {
-    const result = matchUrl(url);
+    const result = matchResults.get(url) ?? { pattern: null, confidence: 0 };
     return {
       url,
       identified: !!result.pattern,

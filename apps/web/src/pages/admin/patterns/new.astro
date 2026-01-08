@@ -1,0 +1,234 @@
+---
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+
+const categories = [
+  { value: "analytics", label: "Analytics" },
+  { value: "advertising", label: "Advertising" },
+  { value: "social", label: "Social" },
+  { value: "customer-support", label: "Customer Support" },
+  { value: "ab-testing", label: "A/B Testing" },
+  { value: "tag-manager", label: "Tag Manager" },
+  { value: "cdn", label: "CDN" },
+  { value: "fonts", label: "Fonts" },
+  { value: "video", label: "Video" },
+  { value: "other", label: "Other" },
+];
+---
+
+<AdminLayout title="Add Pattern">
+  <div class="max-w-2xl">
+    <div class="mb-8">
+      <a href="/admin/patterns" class="text-zinc-400 hover:text-white text-sm mb-2 inline-flex items-center gap-1">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+        </svg>
+        Back to patterns
+      </a>
+      <h1 class="text-3xl font-bold">Add New Pattern</h1>
+    </div>
+
+    <form id="pattern-form" class="card space-y-6">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="id" class="block text-sm font-medium text-zinc-300 mb-1">
+            ID <span class="text-red-400">*</span>
+          </label>
+          <input
+            type="text"
+            id="id"
+            name="id"
+            required
+            pattern="[a-z0-9-]+"
+            class="input w-full font-mono"
+            placeholder="google-analytics-4"
+          />
+          <p class="text-xs text-zinc-500 mt-1">Lowercase letters, numbers, and hyphens only</p>
+        </div>
+        <div>
+          <label for="category" class="block text-sm font-medium text-zinc-300 mb-1">
+            Category <span class="text-red-400">*</span>
+          </label>
+          <select id="category" name="category" required class="input w-full">
+            <option value="">Select a category</option>
+            {categories.map((cat) => (
+              <option value={cat.value}>{cat.label}</option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label for="name" class="block text-sm font-medium text-zinc-300 mb-1">
+            Name <span class="text-red-400">*</span>
+          </label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="input w-full"
+            placeholder="Google Analytics 4"
+          />
+        </div>
+        <div>
+          <label for="vendor" class="block text-sm font-medium text-zinc-300 mb-1">
+            Vendor <span class="text-red-400">*</span>
+          </label>
+          <input
+            type="text"
+            id="vendor"
+            name="vendor"
+            required
+            class="input w-full"
+            placeholder="Google"
+          />
+        </div>
+      </div>
+
+      <div>
+        <label for="urlPatterns" class="block text-sm font-medium text-zinc-300 mb-1">
+          URL Patterns <span class="text-red-400">*</span>
+        </label>
+        <textarea
+          id="urlPatterns"
+          name="urlPatterns"
+          required
+          rows="3"
+          class="input w-full font-mono text-sm"
+          placeholder="*://www.googletagmanager.com/gtag/js*&#10;*://www.google-analytics.com/g/collect*"
+        ></textarea>
+        <p class="text-xs text-zinc-500 mt-1">One pattern per line. Use * as wildcard.</p>
+      </div>
+
+      <div>
+        <label for="globalVariables" class="block text-sm font-medium text-zinc-300 mb-1">
+          Global Variables
+        </label>
+        <input
+          type="text"
+          id="globalVariables"
+          name="globalVariables"
+          class="input w-full font-mono"
+          placeholder="gtag, dataLayer"
+        />
+        <p class="text-xs text-zinc-500 mt-1">Comma-separated list of global JS variables</p>
+      </div>
+
+      <div>
+        <label for="knownIssues" class="block text-sm font-medium text-zinc-300 mb-1">
+          Known Issues
+        </label>
+        <textarea
+          id="knownIssues"
+          name="knownIssues"
+          rows="2"
+          class="input w-full text-sm"
+          placeholder="Sets multiple cookies&#10;Sends data to third-party servers"
+        ></textarea>
+        <p class="text-xs text-zinc-500 mt-1">One issue per line</p>
+      </div>
+
+      <div>
+        <label for="alternatives" class="block text-sm font-medium text-zinc-300 mb-1">
+          Alternatives
+        </label>
+        <input
+          type="text"
+          id="alternatives"
+          name="alternatives"
+          class="input w-full"
+          placeholder="Plausible, Fathom, Simple Analytics"
+        />
+        <p class="text-xs text-zinc-500 mt-1">Comma-separated list of alternatives</p>
+      </div>
+
+      <div>
+        <label for="docsUrl" class="block text-sm font-medium text-zinc-300 mb-1">
+          Documentation URL
+        </label>
+        <input
+          type="url"
+          id="docsUrl"
+          name="docsUrl"
+          class="input w-full"
+          placeholder="https://developers.google.com/analytics"
+        />
+      </div>
+
+      <div id="error-message" class="hidden text-red-400 text-sm"></div>
+
+      <div class="flex gap-4">
+        <button type="submit" class="btn-primary" id="submit-btn">
+          Create Pattern
+        </button>
+        <a href="/admin/patterns" class="btn-secondary">Cancel</a>
+      </div>
+    </form>
+  </div>
+</AdminLayout>
+
+<script>
+  const API_URL = import.meta.env.PUBLIC_API_URL ?? "http://localhost:8787";
+
+  const form = document.getElementById("pattern-form");
+  const errorMessage = document.getElementById("error-message");
+  const submitBtn = document.getElementById("submit-btn");
+
+  form?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+
+    const data = {
+      id: formData.get("id"),
+      name: formData.get("name"),
+      vendor: formData.get("vendor"),
+      category: formData.get("category"),
+      urlPatterns: (formData.get("urlPatterns") as string)
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      globalVariables: (formData.get("globalVariables") as string)
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      knownIssues: (formData.get("knownIssues") as string)
+        .split("\n")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      alternatives: (formData.get("alternatives") as string)
+        .split(",")
+        .map((s) => s.trim())
+        .filter(Boolean),
+      docsUrl: formData.get("docsUrl") || null,
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Creating...";
+    errorMessage.classList.add("hidden");
+
+    try {
+      const response = await fetch(`${API_URL}/admin/patterns`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+        credentials: "include",
+      });
+
+      const result = await response.json();
+
+      if (!response.ok) {
+        throw new Error(result.error ?? "Failed to create pattern");
+      }
+
+      // Redirect to patterns list
+      window.location.href = "/admin/patterns";
+    } catch (err) {
+      errorMessage.textContent = err.message;
+      errorMessage.classList.remove("hidden");
+      submitBtn.disabled = false;
+      submitBtn.textContent = "Create Pattern";
+    }
+  });
+</script>

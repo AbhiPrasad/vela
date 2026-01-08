@@ -33,6 +33,12 @@
 
   // Environment variables
   "vars": {
-    "ENVIRONMENT": "development"
+    "ENVIRONMENT": "development",
+    "BETTER_AUTH_URL": "http://localhost:8787"
   }
+
+  // Note: The following secrets should be set via `wrangler secret put`:
+  // - BETTER_AUTH_SECRET (required): Generate with `openssl rand -base64 32`
+  // - GITHUB_CLIENT_ID (optional): For GitHub OAuth
+  // - GITHUB_CLIENT_SECRET (optional): For GitHub OAuth
 }

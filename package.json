@@ -7,13 +7,19 @@
     "lint": "oxlint",
     "typecheck": "turbo typecheck",
     "format": "prettier --write \"**/*.{ts,tsx,astro,json,md}\"",
-    "format:check": "prettier --check \"**/*.{ts,tsx,astro,json,md}\""
+    "format:check": "prettier --check \"**/*.{ts,tsx,astro,json,md}\"",
+    "db:migrate:local": "npx wrangler d1 migrations apply vela-db --local",
+    "db:migrate:remote": "npx wrangler d1 migrations apply vela-db",
+    "patterns": "tsx scripts/manage-patterns.ts",
+    "patterns:seed": "tsx scripts/manage-patterns.ts seed --local"
   },
   "devDependencies": {
     "@total-typescript/tsconfig": "^1.0.4",
+    "commander": "^14.0.2",
     "oxlint": "^0.15.0",
     "prettier": "^3.2.0",
     "prettier-plugin-astro": "^0.13.0",
+    "tsx": "^4.21.0",
     "turbo": "^2.3.0",
     "typescript": "^5.4.0"
   },

@@ -9,8 +9,10 @@ import type {
   Grade,
   Issue,
 } from "@vela/shared";
-import { matchUrl, isFirstParty, extractDomain } from "@vela/script-db";
 import { BrowserService } from "./browser.js";
+import { PatternService } from "./pattern.js";
+import { isFirstParty, extractDomain } from "../utils/url.js";
+import { createDb, type Database } from "../db/index.js";
 
 interface ScanRow {
   id: string;
@@ -28,12 +30,16 @@ interface ScanRow {
 
 export class ScanService {
   private browserService: BrowserService;
+  private patternService: PatternService;
+  private drizzleDb: Database;
 
   constructor(
     private db: D1Database,
     browserBinding: Fetcher
   ) {
     this.browserService = new BrowserService(browserBinding);
+    this.drizzleDb = createDb(db);
+    this.patternService = new PatternService(this.drizzleDb);
   }
 
   /**
@@ -105,7 +111,7 @@ export class ScanService {
       const browserResult = await this.browserService.scanPage(url);
 
       // Analyze scripts
-      const scripts = this.analyzeScripts(browserResult.requests, url);
+      const scripts = await this.analyzeScripts(browserResult.requests, url);
       const performance = this.analyzePerformance(browserResult, scripts);
       const summary = this.calculateSummary(scripts, performance, browserResult);
 
@@ -160,17 +166,17 @@ export class ScanService {
   /**
    * Analyze network requests to identify third-party scripts
    */
-  private analyzeScripts(
+  private async analyzeScripts(
     requests: NetworkRequest[],
     pageUrl: string
-  ): ThirdPartyScript[] {
+  ): Promise<ThirdPartyScript[]> {
     const scripts: ThirdPartyScript[] = [];
     const scriptRequests = requests.filter(
       (r) => r.type === "script" && !isFirstParty(r.url, pageUrl)
     );
 
     for (const request of scriptRequests) {
-      const match = matchUrl(request.url);
+      const match = await this.patternService.matchUrl(request.url);
 
       scripts.push({
         url: request.url,

@@ -7,6 +7,8 @@ interface Props {
 }
 
 const { title, description = "Analyze third-party scripts on any website" } = Astro.props;
+const user = Astro.locals.user;
+const isAdmin = user?.role === "admin" || user?.role === "editor";
 ---
 
 <!doctype html>
@@ -35,6 +37,20 @@ const { title, description = "Analyze third-party scripts on any website" } = As
           <a href="/scripts" class="text-zinc-400 hover:text-zinc-100 transition-colors">
             Script Database
           </a>
+          {isAdmin && (
+            <a href="/admin" class="text-zinc-400 hover:text-zinc-100 transition-colors">
+              Admin
+            </a>
+          )}
+          {user ? (
+            <a href="/auth/logout" class="text-zinc-400 hover:text-zinc-100 transition-colors">
+              Sign out
+            </a>
+          ) : (
+            <a href="/auth/login" class="text-zinc-400 hover:text-zinc-100 transition-colors">
+              Sign in
+            </a>
+          )}
           <a
             href="https://github.com"
             target="_blank"

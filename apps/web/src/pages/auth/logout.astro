@@ -1,0 +1,29 @@
+---
+// Logout page - client-side redirect after calling logout API
+---
+
+<html>
+  <head>
+    <title>Logging out...</title>
+  </head>
+  <body>
+    <script>
+      const API_URL = import.meta.env.PUBLIC_API_URL ?? "http://localhost:8787";
+
+      (async () => {
+        try {
+          await fetch(`${API_URL}/api/auth/sign-out`, {
+            method: "POST",
+            credentials: "include",
+          });
+        } catch {
+          // Ignore errors
+        }
+
+        // Redirect to home
+        window.location.href = "/";
+      })();
+    </script>
+    <p>Logging out...</p>
+  </body>
+</html>
