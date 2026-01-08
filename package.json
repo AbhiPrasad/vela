@@ -1,0 +1,24 @@
+{
+  "name": "vela",
+  "private": true,
+  "scripts": {
+    "build": "turbo build",
+    "dev": "turbo dev",
+    "lint": "oxlint",
+    "typecheck": "turbo typecheck",
+    "format": "prettier --write \"**/*.{ts,tsx,astro,json,md}\"",
+    "format:check": "prettier --check \"**/*.{ts,tsx,astro,json,md}\""
+  },
+  "devDependencies": {
+    "@total-typescript/tsconfig": "^1.0.4",
+    "oxlint": "^0.15.0",
+    "prettier": "^3.2.0",
+    "prettier-plugin-astro": "^0.13.0",
+    "turbo": "^2.3.0",
+    "typescript": "^5.4.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "engines": {
+    "node": ">=20"
+  }
+}

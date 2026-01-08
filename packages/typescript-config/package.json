@@ -1,0 +1,15 @@
+{
+  "name": "@vela/typescript-config",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared TypeScript configurations for Vela monorepo",
+  "exports": {
+    "./base.json": "./base.json",
+    "./astro.json": "./astro.json",
+    "./worker.json": "./worker.json",
+    "./library.json": "./library.json"
+  },
+  "peerDependencies": {
+    "@total-typescript/tsconfig": "^1.0.4"
+  }
+}
