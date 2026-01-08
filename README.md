@@ -13,6 +13,12 @@ A third-party script auditor that analyzes websites to identify tracking scripts
 - **Authentication** with email/password
 - **Role-based access control** (user, editor, admin)
 
+## Screenshots
+
+![Homepage](docs/images/homepage.png)
+
+![Scan Results](docs/images/scan.png)
+
 ## Tech Stack
 
 - **Runtime**: Cloudflare Workers + Pages
@@ -102,18 +108,18 @@ vela/
 
 ## Commands
 
-| Command | Description |
-|---------|-------------|
-| `pnpm dev` | Start all apps in dev mode |
-| `pnpm build` | Build all packages and apps |
-| `pnpm typecheck` | Type check entire monorepo |
-| `pnpm lint` | Lint with oxlint |
-| `pnpm format` | Format with Prettier |
-| `pnpm db:migrate:local` | Apply migrations locally |
+| Command                  | Description                    |
+| ------------------------ | ------------------------------ |
+| `pnpm dev`               | Start all apps in dev mode     |
+| `pnpm build`             | Build all packages and apps    |
+| `pnpm typecheck`         | Type check entire monorepo     |
+| `pnpm lint`              | Lint with oxlint               |
+| `pnpm format`            | Format with Prettier           |
+| `pnpm db:migrate:local`  | Apply migrations locally       |
 | `pnpm db:migrate:remote` | Apply migrations to production |
-| `pnpm patterns` | Pattern management CLI |
-| `pnpm patterns:seed` | Seed test patterns |
-| `pnpm admin:seed` | Create an admin user |
+| `pnpm patterns`          | Pattern management CLI         |
+| `pnpm patterns:seed`     | Seed test patterns             |
+| `pnpm admin:seed`        | Create an admin user           |
 
 ### Per-App Commands
 
@@ -144,16 +150,19 @@ pnpm patterns seed                       # Seed test patterns
 ## Authentication & Roles
 
 **Roles:**
+
 - `user` - Default role, public access only
 - `editor` - Can manage script patterns (CRUD operations)
 - `admin` - Full access including user management
 
 **Auth Methods:**
+
 - Email/password login (admin users created via CLI)
 
 ## API Endpoints
 
 ### Public
+
 - `GET /health` - Health check
 - `POST /scans` - Create a new scan
 - `GET /scans/:id` - Get scan results
@@ -161,11 +170,13 @@ pnpm patterns seed                       # Seed test patterns
 - `POST /scripts/identify` - Identify a script URL
 
 ### Auth (`/api/auth/*`)
+
 - `POST /api/auth/sign-in/email` - Login
 - `POST /api/auth/sign-out` - Logout
 - `GET /api/auth/get-session` - Current session
 
 ### Admin (`/admin/*` - requires auth)
+
 - `GET /admin/patterns` - List patterns (editor+)
 - `POST /admin/patterns` - Create pattern (editor+)
 - `PUT /admin/patterns/:id` - Update pattern (editor+)
@@ -177,12 +188,14 @@ pnpm patterns seed                       # Seed test patterns
 ## Cloudflare Bindings
 
 The API worker uses:
+
 - `DB` - D1 database for scans, patterns, and auth
 - `SCAN_CACHE` - KV namespace for result caching
 - `RATE_LIMIT` - KV namespace for rate limiting
 - `BROWSER` - Browser Rendering binding for Puppeteer
 
 **Required Secrets:**
+
 ```bash
 wrangler secret put BETTER_AUTH_SECRET    # Required - generate with: openssl rand -base64 32
 wrangler secret put WEB_URL               # Required for production - your frontend URL (e.g., https://vela.example.com)

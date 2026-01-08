@@ -1,0 +1,40 @@
+---
+interface Props {
+  breakdown: Record<string, number>;
+}
+
+const { breakdown } = Astro.props;
+
+const entries = Object.entries(breakdown).sort((a, b) => b[1] - a[1]);
+const total = entries.reduce((sum, [, count]) => sum + count, 0);
+---
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+  {entries.length > 0 ? (
+    <div class="space-y-3">
+      {entries.map(([domain, count]) => {
+        const percentage = Math.round((count / total) * 100);
+        return (
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <span class="text-sm font-medium text-zinc-300 truncate" title={domain}>
+                {domain}
+              </span>
+              <span class="text-sm text-zinc-400 shrink-0 ml-2">
+                {count} script{count !== 1 ? "s" : ""} ({percentage}%)
+              </span>
+            </div>
+            <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-cyan-500 rounded-full transition-all duration-500"
+                style={`width: ${percentage}%`}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <p class="text-zinc-500 text-center">No scripts detected</p>
+  )}
+</div>

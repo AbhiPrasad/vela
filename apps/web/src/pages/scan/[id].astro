@@ -4,9 +4,56 @@ import GradeBadge from "../../components/GradeBadge.astro";
 import ScriptCard from "../../components/ScriptCard.astro";
 import IssueCard from "../../components/IssueCard.astro";
 import CategoryBreakdown from "../../components/CategoryBreakdown.astro";
-import type { ScanResult } from "@vela/shared";
+import DomainBreakdown from "../../components/DomainBreakdown.astro";
+import type { ScanResult, Issue, ThirdPartyScript } from "@vela/shared";
 
 const { id } = Astro.params;
+
+// Helper to extract domain from URL
+const getDomain = (url: string | null): string => {
+  if (!url) return "Unknown";
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return "Unknown";
+  }
+};
+
+// Group issues by domain
+const groupIssuesByDomain = (issues: Issue[]): Map<string, Issue[]> => {
+  const grouped = new Map<string, Issue[]>();
+  for (const issue of issues) {
+    const domain = getDomain(issue.scriptUrl);
+    if (!grouped.has(domain)) {
+      grouped.set(domain, []);
+    }
+    grouped.get(domain)!.push(issue);
+  }
+  return grouped;
+};
+
+// Group scripts by domain
+const groupScriptsByDomain = (scripts: ThirdPartyScript[]): Map<string, ThirdPartyScript[]> => {
+  const grouped = new Map<string, ThirdPartyScript[]>();
+  for (const script of scripts) {
+    const domain = getDomain(script.url);
+    if (!grouped.has(domain)) {
+      grouped.set(domain, []);
+    }
+    grouped.get(domain)!.push(script);
+  }
+  return grouped;
+};
+
+// Create domain breakdown record
+const getDomainBreakdown = (scripts: ThirdPartyScript[]): Record<string, number> => {
+  const breakdown: Record<string, number> = {};
+  for (const script of scripts) {
+    const domain = getDomain(script.url);
+    breakdown[domain] = (breakdown[domain] || 0) + 1;
+  }
+  return breakdown;
+};
 
 // Fetch scan result from API
 const apiUrl = import.meta.env.API_URL || "http://localhost:8787";
@@ -56,7 +103,16 @@ const isLoading = scan?.status === "queued" || scan?.status === "running";
           <div>
             <h1 class="text-2xl font-bold mb-1 break-all">{scan.url}</h1>
             <p class="text-zinc-400 text-sm">
-              Scanned {scan.completedAt ? new Date(scan.completedAt).toLocaleString() : "recently"}
+              Scanned {scan.completedAt ? new Date(scan.completedAt).toLocaleString(undefined, {
+                year: 'numeric',
+                month: '2-digit',
+                day: '2-digit',
+                hour: 'numeric',
+                minute: '2-digit',
+                second: '2-digit',
+                timeZone: 'UTC',
+                timeZoneName: 'short'
+              }) : "recently"}
               {scan.duration && ` in ${(scan.duration / 1000).toFixed(1)}s`}
             </p>
           </div>
@@ -87,31 +143,52 @@ const isLoading = scan?.status === "queued" || scan?.status === "running";
         {scan.summary.topIssues.length > 0 && (
           <section class="mb-8">
             <h2 class="text-xl font-semibold mb-4">Issues Found</h2>
-            <div class="space-y-3">
-              {scan.summary.topIssues.map((issue) => (
-                <IssueCard issue={issue} />
+            <div class="space-y-6">
+              {[...groupIssuesByDomain(scan.summary.topIssues)].map(([domain, issues]) => (
+                <div>
+                  <h3 class="text-sm font-medium text-zinc-400 mb-3">{domain} ({issues.length})</h3>
+                  <div class="space-y-3">
+                    {issues.map((issue) => (
+                      <IssueCard issue={issue} />
+                    ))}
+                  </div>
+                </div>
               ))}
             </div>
           </section>
         )}
 
-        <!-- Category Breakdown -->
-        <section class="mb-8">
-          <h2 class="text-xl font-semibold mb-4">Scripts by Category</h2>
-          <CategoryBreakdown breakdown={scan.summary.categoryBreakdown} />
-        </section>
+        <!-- Breakdowns -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+          <section>
+            <h2 class="text-xl font-semibold mb-4">Scripts by Category</h2>
+            <CategoryBreakdown breakdown={scan.summary.categoryBreakdown} />
+          </section>
+          <section>
+            <h2 class="text-xl font-semibold mb-4">Scripts by Domain</h2>
+            <DomainBreakdown breakdown={getDomainBreakdown(scan.scripts)} />
+          </section>
+        </div>
 
         <!-- Scripts List -->
         <section>
           <h2 class="text-xl font-semibold mb-4">
             All Third-Party Scripts ({scan.scripts.length})
           </h2>
-          <div class="space-y-3">
-            {scan.scripts.map((script) => (
-              <ScriptCard script={script} />
-            ))}
-          </div>
-          {scan.scripts.length === 0 && (
+          {scan.scripts.length > 0 ? (
+            <div class="space-y-6">
+              {[...groupScriptsByDomain(scan.scripts)].map(([domain, scripts]) => (
+                <div>
+                  <h3 class="text-sm font-medium text-zinc-400 mb-3">{domain} ({scripts.length})</h3>
+                  <div class="space-y-3">
+                    {scripts.map((script) => (
+                      <ScriptCard script={script} />
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          ) : (
             <p class="text-zinc-400 text-center py-8">
               No third-party scripts detected
             </p>
