@@ -1,0 +1,26 @@
+{
+  "name": "@vela/web",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "deploy": "astro build && wrangler pages deploy dist",
+    "typecheck": "astro check && tsc --noEmit"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.7.0",
+    "@astrojs/cloudflare": "^11.0.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@vela/shared": "workspace:*",
+    "astro": "^4.10.0"
+  },
+  "devDependencies": {
+    "@vela/typescript-config": "workspace:*",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.4.0",
+    "wrangler": "^3.57.0"
+  }
+}

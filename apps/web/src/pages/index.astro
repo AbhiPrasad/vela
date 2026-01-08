@@ -1,0 +1,100 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import ScanForm from "../components/ScanForm.astro";
+import FeatureCard from "../components/FeatureCard.astro";
+---
+
+<BaseLayout title="Third-Party Script Auditor">
+  <div class="mx-auto max-w-6xl px-4 py-16">
+    <!-- Hero Section -->
+    <section class="text-center mb-16">
+      <h1 class="text-4xl sm:text-5xl font-bold mb-4">
+        Know What Your<br />
+        <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-500">
+          Third-Party Scripts
+        </span><br />
+        Are Really Doing
+      </h1>
+      <p class="text-xl text-zinc-400 max-w-2xl mx-auto mb-8">
+        Analyze any website to discover third-party scripts, their performance impact,
+        data collection behavior, and get actionable recommendations.
+      </p>
+
+      <ScanForm />
+    </section>
+
+    <!-- Features Section -->
+    <section class="grid md:grid-cols-3 gap-6 mb-16">
+      <FeatureCard
+        icon="⚡"
+        title="Performance Analysis"
+        description="Measure main thread blocking time, network requests, and impact on Core Web Vitals for each script."
+      />
+      <FeatureCard
+        icon="🔒"
+        title="Privacy Insights"
+        description="Detect cookies, storage usage, fingerprinting techniques, and data being sent to third parties."
+      />
+      <FeatureCard
+        icon="📊"
+        title="Script Database"
+        description="Identify 100+ common third-party scripts with known issues, alternatives, and community ratings."
+      />
+    </section>
+
+    <!-- How It Works -->
+    <section class="mb-16">
+      <h2 class="text-2xl font-bold text-center mb-8">How It Works</h2>
+      <div class="grid md:grid-cols-4 gap-4">
+        <div class="text-center p-4">
+          <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-3 font-bold">
+            1
+          </div>
+          <h3 class="font-semibold mb-2">Enter URL</h3>
+          <p class="text-sm text-zinc-400">Paste any website URL to analyze</p>
+        </div>
+        <div class="text-center p-4">
+          <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-3 font-bold">
+            2
+          </div>
+          <h3 class="font-semibold mb-2">We Scan</h3>
+          <p class="text-sm text-zinc-400">Our browser loads and analyzes the page</p>
+        </div>
+        <div class="text-center p-4">
+          <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-3 font-bold">
+            3
+          </div>
+          <h3 class="font-semibold mb-2">Identify Scripts</h3>
+          <p class="text-sm text-zinc-400">Match against our database of known scripts</p>
+        </div>
+        <div class="text-center p-4">
+          <div class="w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center mx-auto mb-3 font-bold">
+            4
+          </div>
+          <h3 class="font-semibold mb-2">Get Report</h3>
+          <p class="text-sm text-zinc-400">View detailed analysis and recommendations</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="grid grid-cols-2 md:grid-cols-4 gap-4 p-6 bg-zinc-900 rounded-xl">
+      <div class="text-center">
+        <p class="text-3xl font-bold text-blue-400">65+</p>
+        <p class="text-sm text-zinc-400">Known Scripts</p>
+      </div>
+      <div class="text-center">
+        <p class="text-3xl font-bold text-purple-400">8</p>
+        <p class="text-sm text-zinc-400">Categories</p>
+      </div>
+      <div class="text-center">
+        <p class="text-3xl font-bold text-green-400">&lt;60s</p>
+        <p class="text-sm text-zinc-400">Scan Time</p>
+      </div>
+      <div class="text-center">
+        <p class="text-3xl font-bold text-orange-400">Free</p>
+        <p class="text-sm text-zinc-400">To Use</p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

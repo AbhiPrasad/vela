@@ -1,0 +1,136 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryBadge from "../../components/CategoryBadge.astro";
+import type { ScriptCategory } from "@vela/shared";
+
+interface ScriptPattern {
+  id: string;
+  name: string;
+  vendor: string;
+  category: ScriptCategory;
+  urlPatterns: string[];
+  knownIssues: string[];
+  alternatives: string[];
+}
+
+// Fetch scripts from API
+const apiUrl = import.meta.env.API_URL || "http://localhost:8787";
+let scripts: ScriptPattern[] = [];
+let categories: { category: string; count: number }[] = [];
+
+const selectedCategory = Astro.url.searchParams.get("category");
+const searchQuery = Astro.url.searchParams.get("search");
+
+try {
+  const params = new URLSearchParams();
+  if (selectedCategory) params.set("category", selectedCategory);
+  if (searchQuery) params.set("search", searchQuery);
+  params.set("limit", "100");
+
+  const [scriptsRes, categoriesRes] = await Promise.all([
+    fetch(`${apiUrl}/scripts?${params}`),
+    fetch(`${apiUrl}/scripts/categories`),
+  ]);
+
+  if (scriptsRes.ok) {
+    const data = await scriptsRes.json();
+    scripts = data.scripts;
+  }
+  if (categoriesRes.ok) {
+    const data = await categoriesRes.json();
+    categories = data.categories;
+  }
+} catch (e) {
+  console.error("Failed to fetch scripts:", e);
+}
+---
+
+<BaseLayout title="Script Database">
+  <div class="mx-auto max-w-6xl px-4 py-8">
+    <div class="mb-8">
+      <h1 class="text-3xl font-bold mb-2">Script Database</h1>
+      <p class="text-zinc-400">
+        Browse our database of {scripts.length}+ known third-party scripts
+      </p>
+    </div>
+
+    <!-- Filters -->
+    <div class="flex flex-col md:flex-row gap-4 mb-8">
+      <!-- Search -->
+      <form class="flex-1" method="get">
+        <div class="relative">
+          <input
+            type="text"
+            name="search"
+            placeholder="Search scripts..."
+            value={searchQuery || ""}
+            class="w-full bg-zinc-900 border border-zinc-800 rounded-lg px-4 py-2 pl-10 focus:outline-none focus:border-blue-500"
+          />
+          <span class="absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500">
+            🔍
+          </span>
+        </div>
+      </form>
+
+      <!-- Category Filter -->
+      <div class="flex flex-wrap gap-2">
+        <a
+          href="/scripts"
+          class:list={[
+            "px-3 py-1.5 rounded-full text-sm transition-colors",
+            !selectedCategory
+              ? "bg-blue-500 text-white"
+              : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700",
+          ]}
+        >
+          All
+        </a>
+        {categories.map(({ category, count }) => (
+          <a
+            href={`/scripts?category=${category}`}
+            class:list={[
+              "px-3 py-1.5 rounded-full text-sm transition-colors",
+              selectedCategory === category
+                ? "bg-blue-500 text-white"
+                : "bg-zinc-800 text-zinc-300 hover:bg-zinc-700",
+            ]}
+          >
+            {category} ({count})
+          </a>
+        ))}
+      </div>
+    </div>
+
+    <!-- Scripts Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      {scripts.map((script) => (
+        <a
+          href={`/scripts/${script.id}`}
+          class="block bg-zinc-900 border border-zinc-800 rounded-lg p-4 hover:border-zinc-700 transition-colors"
+        >
+          <div class="flex items-start justify-between mb-2">
+            <h3 class="font-semibold">{script.name}</h3>
+            <CategoryBadge category={script.category} />
+          </div>
+          <p class="text-sm text-zinc-400 mb-3">{script.vendor}</p>
+          {script.knownIssues.length > 0 && (
+            <p class="text-xs text-orange-400">
+              {script.knownIssues.length} known issue{script.knownIssues.length > 1 ? "s" : ""}
+            </p>
+          )}
+          {script.alternatives.length > 0 && (
+            <p class="text-xs text-green-400">
+              {script.alternatives.length} alternative{script.alternatives.length > 1 ? "s" : ""} available
+            </p>
+          )}
+        </a>
+      ))}
+    </div>
+
+    {scripts.length === 0 && (
+      <div class="text-center py-16">
+        <p class="text-zinc-400">No scripts found</p>
+      </div>
+    )}
+  </div>
+</BaseLayout>

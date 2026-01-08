@@ -1,0 +1,52 @@
+---
+import type { ScriptCategory } from "@vela/shared";
+
+interface Props {
+  category: ScriptCategory;
+  size?: "small" | "medium" | "large";
+}
+
+const { category, size = "small" } = Astro.props;
+
+const categoryColors: Record<ScriptCategory, string> = {
+  analytics: "bg-category-analytics/20 text-category-analytics",
+  advertising: "bg-category-advertising/20 text-category-advertising",
+  social: "bg-category-social/20 text-category-social",
+  "customer-support": "bg-category-customer-support/20 text-category-customer-support",
+  "ab-testing": "bg-category-ab-testing/20 text-category-ab-testing",
+  "tag-manager": "bg-category-tag-manager/20 text-category-tag-manager",
+  cdn: "bg-category-cdn/20 text-category-cdn",
+  fonts: "bg-category-fonts/20 text-category-fonts",
+  video: "bg-category-video/20 text-category-video",
+  other: "bg-category-other/20 text-category-other",
+};
+
+const categoryLabels: Record<ScriptCategory, string> = {
+  analytics: "Analytics",
+  advertising: "Advertising",
+  social: "Social",
+  "customer-support": "Support",
+  "ab-testing": "A/B Testing",
+  "tag-manager": "Tag Manager",
+  cdn: "CDN",
+  fonts: "Fonts",
+  video: "Video",
+  other: "Other",
+};
+
+const sizeClasses = {
+  small: "px-2 py-0.5 text-xs",
+  medium: "px-3 py-1 text-sm",
+  large: "px-4 py-1.5 text-base",
+};
+---
+
+<span
+  class:list={[
+    "rounded-full font-medium whitespace-nowrap",
+    categoryColors[category],
+    sizeClasses[size],
+  ]}
+>
+  {categoryLabels[category]}
+</span>

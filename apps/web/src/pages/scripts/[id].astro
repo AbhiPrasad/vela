@@ -1,0 +1,140 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import CategoryBadge from "../../components/CategoryBadge.astro";
+import type { ScriptCategory } from "@vela/shared";
+
+interface ScriptPattern {
+  id: string;
+  name: string;
+  vendor: string;
+  category: ScriptCategory;
+  urlPatterns: string[];
+  globalVariables: string[];
+  knownIssues: string[];
+  alternatives: string[];
+  docsUrl: string | null;
+}
+
+const { id } = Astro.params;
+
+// Fetch script from API
+const apiUrl = import.meta.env.API_URL || "http://localhost:8787";
+let script: ScriptPattern | null = null;
+let error: string | null = null;
+
+try {
+  const response = await fetch(`${apiUrl}/scripts/${id}`);
+  if (response.ok) {
+    script = await response.json();
+  } else if (response.status === 404) {
+    error = "Script not found";
+  } else {
+    error = "Failed to load script";
+  }
+} catch (e) {
+  error = "Failed to connect to API";
+}
+---
+
+<BaseLayout title={script ? script.name : "Script Details"}>
+  <div class="mx-auto max-w-4xl px-4 py-8">
+    {error ? (
+      <div class="text-center py-16">
+        <p class="text-xl text-red-400 mb-4">{error}</p>
+        <a href="/scripts" class="text-blue-400 hover:underline">Back to scripts</a>
+      </div>
+    ) : script ? (
+      <>
+        <!-- Header -->
+        <div class="mb-8">
+          <a href="/scripts" class="text-zinc-400 hover:text-zinc-200 text-sm mb-4 inline-block">
+            ← Back to scripts
+          </a>
+          <div class="flex items-start justify-between gap-4">
+            <div>
+              <h1 class="text-3xl font-bold mb-2">{script.name}</h1>
+              <p class="text-xl text-zinc-400">{script.vendor}</p>
+            </div>
+            <CategoryBadge category={script.category} size="large" />
+          </div>
+        </div>
+
+        <!-- Details Grid -->
+        <div class="grid md:grid-cols-2 gap-6 mb-8">
+          <!-- URL Patterns -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+            <h2 class="font-semibold mb-3">URL Patterns</h2>
+            <div class="space-y-2">
+              {script.urlPatterns.map((pattern) => (
+                <code class="block text-sm text-zinc-300 bg-zinc-800 rounded px-2 py-1 break-all">
+                  {pattern}
+                </code>
+              ))}
+            </div>
+          </div>
+
+          <!-- Global Variables -->
+          <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+            <h2 class="font-semibold mb-3">Global Variables</h2>
+            {script.globalVariables.length > 0 ? (
+              <div class="flex flex-wrap gap-2">
+                {script.globalVariables.map((variable) => (
+                  <code class="text-sm text-purple-400 bg-purple-500/10 rounded px-2 py-1">
+                    window.{variable}
+                  </code>
+                ))}
+              </div>
+            ) : (
+              <p class="text-sm text-zinc-500">No known global variables</p>
+            )}
+          </div>
+        </div>
+
+        <!-- Known Issues -->
+        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4 mb-6">
+          <h2 class="font-semibold mb-3">Known Issues</h2>
+          {script.knownIssues.length > 0 ? (
+            <ul class="space-y-2">
+              {script.knownIssues.map((issue) => (
+                <li class="flex items-start gap-2 text-sm">
+                  <span class="text-orange-400 mt-0.5">⚠️</span>
+                  <span class="text-zinc-300">{issue}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="text-sm text-green-400">No known issues</p>
+          )}
+        </div>
+
+        <!-- Alternatives -->
+        <div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4 mb-6">
+          <h2 class="font-semibold mb-3">Alternatives</h2>
+          {script.alternatives.length > 0 ? (
+            <div class="flex flex-wrap gap-2">
+              {script.alternatives.map((alt) => (
+                <span class="text-sm text-green-400 bg-green-500/10 rounded px-3 py-1">
+                  {alt}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p class="text-sm text-zinc-500">No alternatives listed</p>
+          )}
+        </div>
+
+        <!-- Documentation Link -->
+        {script.docsUrl && (
+          <a
+            href={script.docsUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-blue-400 hover:underline"
+          >
+            View Documentation →
+          </a>
+        )}
+      </>
+    ) : null}
+  </div>
+</BaseLayout>

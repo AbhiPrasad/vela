@@ -1,0 +1,50 @@
+---
+import type { ThirdPartyScript } from "@vela/shared";
+import CategoryBadge from "./CategoryBadge.astro";
+
+interface Props {
+  script: ThirdPartyScript;
+}
+
+const { script } = Astro.props;
+
+// Extract domain from URL
+const getDomain = (url: string): string => {
+  try {
+    return new URL(url).hostname;
+  } catch {
+    return url;
+  }
+};
+
+const domain = getDomain(script.url);
+const sizeKB = (script.sizeBytes / 1024).toFixed(1);
+---
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+  <div class="flex items-start justify-between gap-4 mb-2">
+    <div class="min-w-0 flex-1">
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class="font-semibold truncate">{script.vendor || domain}</h3>
+        <CategoryBadge category={script.category} />
+      </div>
+      <p class="text-sm text-zinc-500 truncate" title={script.url}>
+        {script.url}
+      </p>
+    </div>
+    <div class="text-right shrink-0">
+      <p class="font-mono text-sm">{sizeKB}KB</p>
+    </div>
+  </div>
+
+  <div class="flex items-center gap-4 text-xs text-zinc-500">
+    {script.async && <span class="text-green-400">async</span>}
+    {script.defer && <span class="text-blue-400">defer</span>}
+    {!script.async && !script.defer && (
+      <span class="text-orange-400">render-blocking</span>
+    )}
+    {script.confidence < 1 && (
+      <span>Confidence: {(script.confidence * 100).toFixed(0)}%</span>
+    )}
+  </div>
+</div>

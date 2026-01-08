@@ -1,0 +1,142 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import GradeBadge from "../../components/GradeBadge.astro";
+import ScriptCard from "../../components/ScriptCard.astro";
+import IssueCard from "../../components/IssueCard.astro";
+import CategoryBreakdown from "../../components/CategoryBreakdown.astro";
+import type { ScanResult } from "@vela/shared";
+
+const { id } = Astro.params;
+
+// Fetch scan result from API
+const apiUrl = import.meta.env.API_URL || "http://localhost:8787";
+let scan: ScanResult | null = null;
+let error: string | null = null;
+
+try {
+  const response = await fetch(`${apiUrl}/scans/${id}`);
+  if (response.ok) {
+    scan = await response.json();
+  } else if (response.status === 404) {
+    error = "Scan not found";
+  } else {
+    error = "Failed to load scan";
+  }
+} catch (e) {
+  error = "Failed to connect to API";
+}
+
+const isLoading = scan?.status === "queued" || scan?.status === "running";
+---
+
+<BaseLayout title={scan ? `Scan: ${new URL(scan.url).hostname}` : "Scan Result"}>
+  <div class="mx-auto max-w-6xl px-4 py-8">
+    {error ? (
+      <div class="text-center py-16">
+        <p class="text-xl text-red-400 mb-4">{error}</p>
+        <a href="/" class="text-blue-400 hover:underline">Go back home</a>
+      </div>
+    ) : isLoading ? (
+      <div class="text-center py-16" id="loading-state">
+        <div class="animate-spin w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full mx-auto mb-4"></div>
+        <h2 class="text-xl font-semibold mb-2">Scanning in progress...</h2>
+        <p class="text-zinc-400 mb-4">Analyzing {scan?.url}</p>
+        <p class="text-sm text-zinc-500">This usually takes 30-60 seconds</p>
+      </div>
+    ) : scan?.status === "failed" ? (
+      <div class="text-center py-16">
+        <p class="text-xl text-red-400 mb-4">Scan failed</p>
+        <p class="text-zinc-400 mb-4">{scan.errorMessage}</p>
+        <a href="/" class="text-blue-400 hover:underline">Try another URL</a>
+      </div>
+    ) : scan?.status === "completed" && scan.summary ? (
+      <>
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+          <div>
+            <h1 class="text-2xl font-bold mb-1 break-all">{scan.url}</h1>
+            <p class="text-zinc-400 text-sm">
+              Scanned {scan.completedAt ? new Date(scan.completedAt).toLocaleString() : "recently"}
+              {scan.duration && ` in ${(scan.duration / 1000).toFixed(1)}s`}
+            </p>
+          </div>
+          <GradeBadge grade={scan.summary.grade} size="large" />
+        </div>
+
+        <!-- Summary Stats -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+          <div class="bg-zinc-900 rounded-lg p-4">
+            <p class="text-3xl font-bold">{scan.summary.totalScripts}</p>
+            <p class="text-sm text-zinc-400">Third-Party Scripts</p>
+          </div>
+          <div class="bg-zinc-900 rounded-lg p-4">
+            <p class="text-3xl font-bold">{scan.summary.totalRequests}</p>
+            <p class="text-sm text-zinc-400">Network Requests</p>
+          </div>
+          <div class="bg-zinc-900 rounded-lg p-4">
+            <p class="text-3xl font-bold">{(scan.summary.totalBytes / 1024).toFixed(0)}KB</p>
+            <p class="text-sm text-zinc-400">Total Transfer</p>
+          </div>
+          <div class="bg-zinc-900 rounded-lg p-4">
+            <p class="text-3xl font-bold">{scan.summary.totalMainThreadTime}ms</p>
+            <p class="text-sm text-zinc-400">Main Thread Time</p>
+          </div>
+        </div>
+
+        <!-- Issues -->
+        {scan.summary.topIssues.length > 0 && (
+          <section class="mb-8">
+            <h2 class="text-xl font-semibold mb-4">Issues Found</h2>
+            <div class="space-y-3">
+              {scan.summary.topIssues.map((issue) => (
+                <IssueCard issue={issue} />
+              ))}
+            </div>
+          </section>
+        )}
+
+        <!-- Category Breakdown -->
+        <section class="mb-8">
+          <h2 class="text-xl font-semibold mb-4">Scripts by Category</h2>
+          <CategoryBreakdown breakdown={scan.summary.categoryBreakdown} />
+        </section>
+
+        <!-- Scripts List -->
+        <section>
+          <h2 class="text-xl font-semibold mb-4">
+            All Third-Party Scripts ({scan.scripts.length})
+          </h2>
+          <div class="space-y-3">
+            {scan.scripts.map((script) => (
+              <ScriptCard script={script} />
+            ))}
+          </div>
+          {scan.scripts.length === 0 && (
+            <p class="text-zinc-400 text-center py-8">
+              No third-party scripts detected
+            </p>
+          )}
+        </section>
+      </>
+    ) : null}
+  </div>
+
+  {isLoading && (
+    <script define:vars={{ scanId: id, apiUrl }}>
+      // Poll for scan completion
+      const pollInterval = setInterval(async () => {
+        try {
+          const response = await fetch(`${apiUrl}/scans/${scanId}`);
+          const data = await response.json();
+
+          if (data.status === "completed" || data.status === "failed") {
+            clearInterval(pollInterval);
+            window.location.reload();
+          }
+        } catch (e) {
+          console.error("Failed to poll scan status:", e);
+        }
+      }, 3000);
+    </script>
+  )}
+</BaseLayout>

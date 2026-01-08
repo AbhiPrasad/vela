@@ -1,0 +1,57 @@
+---
+import type { Issue } from "@vela/shared";
+
+interface Props {
+  issue: Issue;
+}
+
+const { issue } = Astro.props;
+
+const severityStyles = {
+  critical: {
+    bg: "bg-red-500/10 border-red-500/30",
+    icon: "🚨",
+    label: "Critical",
+    labelColor: "text-red-400",
+  },
+  warning: {
+    bg: "bg-orange-500/10 border-orange-500/30",
+    icon: "⚠️",
+    label: "Warning",
+    labelColor: "text-orange-400",
+  },
+  info: {
+    bg: "bg-blue-500/10 border-blue-500/30",
+    icon: "ℹ️",
+    label: "Info",
+    labelColor: "text-blue-400",
+  },
+};
+
+const style = severityStyles[issue.severity];
+---
+
+<div class:list={["border rounded-lg p-4", style.bg]}>
+  <div class="flex items-start gap-3">
+    <span class="text-xl">{style.icon}</span>
+    <div class="flex-1 min-w-0">
+      <div class="flex items-center gap-2 mb-1">
+        <h3 class="font-semibold">{issue.title}</h3>
+        <span class:list={["text-xs font-medium", style.labelColor]}>
+          {style.label}
+        </span>
+      </div>
+      <p class="text-sm text-zinc-400 mb-2">{issue.description}</p>
+      {issue.recommendation && (
+        <p class="text-sm text-zinc-300">
+          <span class="text-zinc-500">Recommendation:</span> {issue.recommendation}
+        </p>
+      )}
+      {issue.scriptUrl && (
+        <p class="text-xs text-zinc-500 mt-2 truncate" title={issue.scriptUrl}>
+          {issue.scriptUrl}
+        </p>
+      )}
+    </div>
+  </div>
+</div>

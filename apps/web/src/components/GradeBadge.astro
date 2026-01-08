@@ -1,0 +1,47 @@
+---
+import type { Grade } from "@vela/shared";
+
+interface Props {
+  grade: Grade;
+  size?: "small" | "medium" | "large";
+}
+
+const { grade, size = "medium" } = Astro.props;
+
+const gradeColors: Record<Grade, string> = {
+  A: "bg-grade-a",
+  B: "bg-grade-b",
+  C: "bg-grade-c",
+  D: "bg-grade-d",
+  F: "bg-grade-f",
+};
+
+const sizeClasses = {
+  small: "w-8 h-8 text-sm",
+  medium: "w-12 h-12 text-xl",
+  large: "w-16 h-16 text-3xl",
+};
+
+const gradeLabels: Record<Grade, string> = {
+  A: "Excellent",
+  B: "Good",
+  C: "Fair",
+  D: "Poor",
+  F: "Critical",
+};
+---
+
+<div class="flex items-center gap-2">
+  <div
+    class:list={[
+      "rounded-lg flex items-center justify-center font-bold text-white",
+      gradeColors[grade],
+      sizeClasses[size],
+    ]}
+  >
+    {grade}
+  </div>
+  {size === "large" && (
+    <span class="text-zinc-400 text-sm">{gradeLabels[grade]}</span>
+  )}
+</div>

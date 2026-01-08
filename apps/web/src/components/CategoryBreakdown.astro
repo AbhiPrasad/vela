@@ -1,0 +1,41 @@
+---
+import type { ScriptCategory } from "@vela/shared";
+import CategoryBadge from "./CategoryBadge.astro";
+
+interface Props {
+  breakdown: Record<string, number>;
+}
+
+const { breakdown } = Astro.props;
+
+const entries = Object.entries(breakdown).sort((a, b) => b[1] - a[1]);
+const total = entries.reduce((sum, [, count]) => sum + count, 0);
+---
+
+<div class="bg-zinc-900 border border-zinc-800 rounded-lg p-4">
+  {entries.length > 0 ? (
+    <div class="space-y-3">
+      {entries.map(([category, count]) => {
+        const percentage = Math.round((count / total) * 100);
+        return (
+          <div>
+            <div class="flex items-center justify-between mb-1">
+              <CategoryBadge category={category as ScriptCategory} size="medium" />
+              <span class="text-sm text-zinc-400">
+                {count} script{count !== 1 ? "s" : ""} ({percentage}%)
+              </span>
+            </div>
+            <div class="h-2 bg-zinc-800 rounded-full overflow-hidden">
+              <div
+                class="h-full bg-blue-500 rounded-full transition-all duration-500"
+                style={`width: ${percentage}%`}
+              />
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  ) : (
+    <p class="text-zinc-500 text-center">No scripts detected</p>
+  )}
+</div>

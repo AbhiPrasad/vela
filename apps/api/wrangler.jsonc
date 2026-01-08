@@ -1,0 +1,38 @@
+{
+  "$schema": "https://raw.githubusercontent.com/cloudflare/workers-sdk/main/packages/wrangler/schemas/config/config.schema.json",
+  "name": "vela-api",
+  "main": "src/index.ts",
+  "compatibility_date": "2024-05-12",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // D1 Database binding
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "vela-db",
+      "database_id": "YOUR_D1_DATABASE_ID"
+    }
+  ],
+
+  // KV Namespace bindings
+  "kv_namespaces": [
+    {
+      "binding": "SCAN_CACHE",
+      "id": "YOUR_KV_NAMESPACE_ID"
+    },
+    {
+      "binding": "RATE_LIMIT",
+      "id": "YOUR_RATE_LIMIT_KV_ID"
+    }
+  ],
+
+  // Browser Rendering binding
+  "browser": {
+    "binding": "BROWSER"
+  },
+
+  // Environment variables
+  "vars": {
+    "ENVIRONMENT": "development"
+  }
+}
