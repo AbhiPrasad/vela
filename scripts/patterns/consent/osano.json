@@ -1,0 +1,19 @@
+{
+  "id": "osano",
+  "name": "Osano",
+  "vendor": "Osano",
+  "category": "consent",
+  "url_patterns": [
+    "*://cmp.osano.com/*",
+    "*://disclosure.osano.com/*"
+  ],
+  "global_variables": ["Osano"],
+  "known_issues": [
+    "Consent management platform",
+    "Lightweight compared to competitors",
+    "GDPR/CCPA compliance"
+  ],
+  "alternatives": ["OneTrust", "Cookiebot", "TrustArc"],
+  "docs_url": "https://www.osano.com/cookieconsent/documentation/",
+  "is_active": true
+}

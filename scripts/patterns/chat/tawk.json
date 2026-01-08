@@ -1,0 +1,19 @@
+{
+  "id": "tawk",
+  "name": "Tawk.to",
+  "vendor": "Tawk.to",
+  "category": "chat",
+  "url_patterns": [
+    "*://embed.tawk.to/*",
+    "*://va.tawk.to/*"
+  ],
+  "global_variables": ["Tawk_API", "Tawk_LoadStart"],
+  "known_issues": [
+    "Free chat widget",
+    "Tracks visitor behavior",
+    "Can be slow to load"
+  ],
+  "alternatives": ["Crisp", "Zendesk Chat", "LiveChat"],
+  "docs_url": "https://developer.tawk.to/",
+  "is_active": true
+}

@@ -1,0 +1,21 @@
+{
+  "id": "new-relic",
+  "name": "New Relic Browser",
+  "vendor": "New Relic",
+  "category": "performance",
+  "url_patterns": [
+    "*://js-agent.newrelic.com/*",
+    "*://bam.nr-data.net/*",
+    "*://bam-cell.nr-data.net/*"
+  ],
+  "global_variables": ["NREUM", "newrelic"],
+  "known_issues": [
+    "Real user monitoring",
+    "JavaScript error tracking",
+    "AJAX timing capture",
+    "Session traces"
+  ],
+  "alternatives": ["Datadog RUM", "Dynatrace", "SpeedCurve"],
+  "docs_url": "https://docs.newrelic.com/docs/browser/",
+  "is_active": true
+}

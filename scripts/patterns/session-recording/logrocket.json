@@ -1,0 +1,21 @@
+{
+  "id": "logrocket",
+  "name": "LogRocket",
+  "vendor": "LogRocket",
+  "category": "session-recording",
+  "url_patterns": [
+    "*://cdn.logrocket.io/*",
+    "*://cdn.lr-ingest.io/*",
+    "*://r.logrocket.io/*"
+  ],
+  "global_variables": ["LogRocket", "_lr_loaded"],
+  "known_issues": [
+    "Session replay with Redux integration",
+    "Network request logging",
+    "Can capture sensitive data",
+    "Large script size"
+  ],
+  "alternatives": ["Hotjar", "FullStory", "Sentry"],
+  "docs_url": "https://docs.logrocket.com/",
+  "is_active": true
+}

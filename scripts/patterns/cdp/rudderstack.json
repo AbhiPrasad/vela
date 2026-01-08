@@ -1,0 +1,19 @@
+{
+  "id": "rudderstack",
+  "name": "RudderStack",
+  "vendor": "RudderStack",
+  "category": "cdp",
+  "url_patterns": [
+    "*://cdn.rudderlabs.com/*",
+    "*://*.dataplane.rudderstack.com/*"
+  ],
+  "global_variables": ["rudderanalytics"],
+  "known_issues": [
+    "Customer data platform",
+    "Routes data to multiple destinations",
+    "Open-source alternative to Segment"
+  ],
+  "alternatives": ["Segment", "Jitsu", "Freshpaint"],
+  "docs_url": "https://www.rudderstack.com/docs/",
+  "is_active": true
+}

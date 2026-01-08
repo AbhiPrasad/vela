@@ -1,0 +1,18 @@
+{
+  "id": "jsdelivr",
+  "name": "jsDelivr",
+  "vendor": "jsDelivr",
+  "category": "cdn",
+  "url_patterns": [
+    "*://cdn.jsdelivr.net/*"
+  ],
+  "global_variables": [],
+  "known_issues": [
+    "Open-source CDN",
+    "npm and GitHub integration",
+    "Good global performance"
+  ],
+  "alternatives": ["unpkg", "cdnjs", "Self-hosted"],
+  "docs_url": "https://www.jsdelivr.com/documentation",
+  "is_active": true
+}

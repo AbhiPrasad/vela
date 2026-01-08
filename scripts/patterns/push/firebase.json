@@ -1,0 +1,21 @@
+{
+  "id": "firebase",
+  "name": "Firebase",
+  "vendor": "Google",
+  "category": "push",
+  "url_patterns": [
+    "*://www.gstatic.com/firebasejs/*",
+    "*://*.firebaseio.com/*",
+    "*://*.firebaseapp.com/*"
+  ],
+  "global_variables": ["firebase"],
+  "known_issues": [
+    "Cloud messaging",
+    "Analytics integration",
+    "Authentication",
+    "Real-time database"
+  ],
+  "alternatives": ["OneSignal", "Supabase", "AWS Amplify"],
+  "docs_url": "https://firebase.google.com/docs",
+  "is_active": true
+}

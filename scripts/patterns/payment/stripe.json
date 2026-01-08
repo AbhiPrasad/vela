@@ -1,0 +1,21 @@
+{
+  "id": "stripe",
+  "name": "Stripe.js",
+  "vendor": "Stripe",
+  "category": "payment",
+  "url_patterns": [
+    "*://js.stripe.com/*",
+    "*://m.stripe.network/*",
+    "*://q.stripe.com/*"
+  ],
+  "global_variables": ["Stripe"],
+  "known_issues": [
+    "PCI compliant payment processing",
+    "Fraud detection scripts",
+    "Device fingerprinting for security",
+    "Required for Stripe payments"
+  ],
+  "alternatives": ["PayPal", "Square", "Braintree"],
+  "docs_url": "https://stripe.com/docs/js",
+  "is_active": true
+}

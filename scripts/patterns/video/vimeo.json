@@ -1,0 +1,20 @@
+{
+  "id": "vimeo",
+  "name": "Vimeo Player",
+  "vendor": "Vimeo",
+  "category": "video",
+  "url_patterns": [
+    "*://player.vimeo.com/*",
+    "*://f.vimeocdn.com/*",
+    "*://vod-progressive.akamaized.net/*"
+  ],
+  "global_variables": ["Vimeo"],
+  "known_issues": [
+    "Video player embed",
+    "Analytics tracking",
+    "Third-party cookies"
+  ],
+  "alternatives": ["Self-hosted video", "Cloudflare Stream", "Mux"],
+  "docs_url": "https://developer.vimeo.com/player/sdk",
+  "is_active": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "trustarc",
+  "name": "TrustArc",
+  "vendor": "TrustArc",
+  "category": "consent",
+  "url_patterns": [
+    "*://consent.trustarc.com/*",
+    "*://consent-pref.trustarc.com/*"
+  ],
+  "global_variables": ["truste", "TrustArc"],
+  "known_issues": [
+    "Enterprise privacy platform",
+    "Cookie consent banner",
+    "Preference management"
+  ],
+  "alternatives": ["OneTrust", "Cookiebot", "Osano"],
+  "docs_url": "https://trustarc.com/",
+  "is_active": true
+}

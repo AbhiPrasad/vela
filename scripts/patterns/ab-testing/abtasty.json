@@ -1,0 +1,19 @@
+{
+  "id": "abtasty",
+  "name": "AB Tasty",
+  "vendor": "AB Tasty",
+  "category": "ab-testing",
+  "url_patterns": [
+    "*://try.abtasty.com/*",
+    "*://cdn.abtasty.com/*"
+  ],
+  "global_variables": ["ABTasty", "abtasty"],
+  "known_issues": [
+    "Visual experimentation",
+    "Can cause flicker",
+    "Blocking script"
+  ],
+  "alternatives": ["Optimizely", "VWO", "Google Optimize"],
+  "docs_url": "https://developers.abtasty.com/",
+  "is_active": true
+}

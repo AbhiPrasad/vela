@@ -1,0 +1,20 @@
+{
+  "id": "vidyard",
+  "name": "Vidyard",
+  "vendor": "Vidyard",
+  "category": "video",
+  "url_patterns": [
+    "*://play.vidyard.com/*",
+    "*://cdn.vidyard.com/*"
+  ],
+  "global_variables": ["VidyardV4", "vidyard"],
+  "known_issues": [
+    "B2B video platform",
+    "Viewer tracking",
+    "CRM integration",
+    "Sales video analytics"
+  ],
+  "alternatives": ["Wistia", "Vimeo", "Loom"],
+  "docs_url": "https://knowledge.vidyard.com/",
+  "is_active": true
+}

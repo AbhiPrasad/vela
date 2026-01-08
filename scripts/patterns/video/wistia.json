@@ -1,0 +1,21 @@
+{
+  "id": "wistia",
+  "name": "Wistia",
+  "vendor": "Wistia",
+  "category": "video",
+  "url_patterns": [
+    "*://fast.wistia.com/*",
+    "*://fast.wistia.net/*",
+    "*://embedwistia-a.akamaihd.net/*"
+  ],
+  "global_variables": ["Wistia", "_wq"],
+  "known_issues": [
+    "Business video hosting",
+    "Detailed viewer analytics",
+    "Engagement tracking",
+    "CRM integrations"
+  ],
+  "alternatives": ["Vimeo", "Vidyard", "YouTube"],
+  "docs_url": "https://wistia.com/support/developers",
+  "is_active": true
+}

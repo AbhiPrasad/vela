@@ -1,0 +1,21 @@
+{
+  "id": "intercom",
+  "name": "Intercom",
+  "vendor": "Intercom",
+  "category": "chat",
+  "url_patterns": [
+    "*://widget.intercom.io/*",
+    "*://js.intercomcdn.com/*",
+    "*://api-iam.intercom.io/*"
+  ],
+  "global_variables": ["Intercom", "intercomSettings"],
+  "known_issues": [
+    "Large script bundle",
+    "Tracks user behavior",
+    "Session recording capabilities",
+    "Can impact page performance"
+  ],
+  "alternatives": ["Crisp", "Drift", "Zendesk Chat", "Tawk.to"],
+  "docs_url": "https://developers.intercom.com/",
+  "is_active": true
+}

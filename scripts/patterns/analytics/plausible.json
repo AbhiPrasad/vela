@@ -1,0 +1,19 @@
+{
+  "id": "plausible",
+  "name": "Plausible Analytics",
+  "vendor": "Plausible",
+  "category": "analytics",
+  "url_patterns": [
+    "*://plausible.io/js/*",
+    "*://plausible.io/api/*"
+  ],
+  "global_variables": ["plausible"],
+  "known_issues": [
+    "Lightweight script (~1KB)",
+    "No cookies by default",
+    "Privacy-friendly"
+  ],
+  "alternatives": ["Fathom", "Simple Analytics", "Umami"],
+  "docs_url": "https://plausible.io/docs",
+  "is_active": true
+}

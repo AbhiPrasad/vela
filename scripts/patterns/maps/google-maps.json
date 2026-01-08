@@ -1,0 +1,21 @@
+{
+  "id": "google-maps",
+  "name": "Google Maps",
+  "vendor": "Google",
+  "category": "maps",
+  "url_patterns": [
+    "*://maps.googleapis.com/*",
+    "*://maps.google.com/*",
+    "*://www.google.com/maps/*"
+  ],
+  "global_variables": ["google.maps", "initMap"],
+  "known_issues": [
+    "Heavy script weight",
+    "Requires API key",
+    "Usage tracking",
+    "Performance impact with multiple maps"
+  ],
+  "alternatives": ["Mapbox", "Leaflet", "OpenStreetMap"],
+  "docs_url": "https://developers.google.com/maps/documentation/javascript",
+  "is_active": true
+}

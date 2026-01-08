@@ -1,0 +1,21 @@
+{
+  "id": "optimizely",
+  "name": "Optimizely",
+  "vendor": "Optimizely",
+  "category": "ab-testing",
+  "url_patterns": [
+    "*://cdn.optimizely.com/*",
+    "*://logx.optimizely.com/*",
+    "*://*.optimizely.com/js/*"
+  ],
+  "global_variables": ["optimizely", "optimizelyEdge"],
+  "known_issues": [
+    "Can cause content flicker",
+    "Blocking script by default",
+    "Heavy experimentation platform",
+    "May delay page rendering"
+  ],
+  "alternatives": ["VWO", "Google Optimize", "LaunchDarkly", "Split.io"],
+  "docs_url": "https://docs.developers.optimizely.com/",
+  "is_active": true
+}

@@ -1,0 +1,20 @@
+{
+  "id": "google-fonts",
+  "name": "Google Fonts",
+  "vendor": "Google",
+  "category": "cdn",
+  "url_patterns": [
+    "*://fonts.googleapis.com/*",
+    "*://fonts.gstatic.com/*"
+  ],
+  "global_variables": [],
+  "known_issues": [
+    "Render-blocking by default",
+    "Privacy concerns (IP logging)",
+    "GDPR issues in some jurisdictions",
+    "Network dependency"
+  ],
+  "alternatives": ["Self-hosted fonts", "System fonts", "Fontsource"],
+  "docs_url": "https://developers.google.com/fonts",
+  "is_active": true
+}

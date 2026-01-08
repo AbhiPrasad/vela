@@ -1,0 +1,19 @@
+{
+  "id": "trackjs",
+  "name": "TrackJS",
+  "vendor": "TrackJS",
+  "category": "error-tracking",
+  "url_patterns": [
+    "*://cdn.trackjs.com/*",
+    "*://capture.trackjs.com/*"
+  ],
+  "global_variables": ["TrackJS", "trackJs"],
+  "known_issues": [
+    "JavaScript error tracking",
+    "Telemetry timeline",
+    "Network error capture"
+  ],
+  "alternatives": ["Sentry", "Bugsnag", "Rollbar"],
+  "docs_url": "https://docs.trackjs.com/",
+  "is_active": true
+}

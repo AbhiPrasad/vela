@@ -1,0 +1,19 @@
+{
+  "id": "typeform",
+  "name": "Typeform",
+  "vendor": "Typeform",
+  "category": "survey",
+  "url_patterns": [
+    "*://embed.typeform.com/*",
+    "*://renderer-assets.typeform.com/*"
+  ],
+  "global_variables": ["tf"],
+  "known_issues": [
+    "Interactive forms and surveys",
+    "Embed tracking",
+    "Response collection"
+  ],
+  "alternatives": ["SurveyMonkey", "Qualtrics", "Tally"],
+  "docs_url": "https://developer.typeform.com/",
+  "is_active": true
+}

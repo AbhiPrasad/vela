@@ -1,0 +1,19 @@
+{
+  "id": "heap",
+  "name": "Heap Analytics",
+  "vendor": "Heap",
+  "category": "analytics",
+  "url_patterns": [
+    "*://cdn.heapanalytics.com/*",
+    "*://heapanalytics.com/*"
+  ],
+  "global_variables": ["heap"],
+  "known_issues": [
+    "Auto-captures all interactions",
+    "Can capture sensitive form data",
+    "Heavy client-side processing"
+  ],
+  "alternatives": ["Amplitude", "Mixpanel", "PostHog"],
+  "docs_url": "https://developers.heap.io/",
+  "is_active": true
+}

@@ -1,0 +1,21 @@
+{
+  "id": "sentry",
+  "name": "Sentry",
+  "vendor": "Sentry",
+  "category": "error-tracking",
+  "url_patterns": [
+    "*://browser.sentry-cdn.com/*",
+    "*://*.ingest.sentry.io/*",
+    "*://sentry.io/api/*"
+  ],
+  "global_variables": ["Sentry", "__SENTRY__"],
+  "known_issues": [
+    "Captures stack traces",
+    "Can include user context",
+    "Session replay feature",
+    "Self-hostable for privacy"
+  ],
+  "alternatives": ["Bugsnag", "Rollbar", "Raygun", "TrackJS"],
+  "docs_url": "https://docs.sentry.io/",
+  "is_active": true
+}

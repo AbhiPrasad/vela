@@ -1,0 +1,19 @@
+{
+  "id": "livechat",
+  "name": "LiveChat",
+  "vendor": "LiveChat",
+  "category": "chat",
+  "url_patterns": [
+    "*://cdn.livechatinc.com/*",
+    "*://secure.livechatinc.com/*"
+  ],
+  "global_variables": ["LiveChatWidget", "LC_API"],
+  "known_issues": [
+    "Full-featured chat platform",
+    "Tracks visitor behavior",
+    "Multiple integrations available"
+  ],
+  "alternatives": ["Intercom", "Zendesk Chat", "Crisp"],
+  "docs_url": "https://developers.livechat.com/",
+  "is_active": true
+}

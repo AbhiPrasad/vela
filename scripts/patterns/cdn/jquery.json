@@ -1,0 +1,21 @@
+{
+  "id": "jquery-cdn",
+  "name": "jQuery (CDN)",
+  "vendor": "OpenJS Foundation",
+  "category": "cdn",
+  "url_patterns": [
+    "*://code.jquery.com/*",
+    "*://ajax.googleapis.com/ajax/libs/jquery/*",
+    "*://cdnjs.cloudflare.com/ajax/libs/jquery/*",
+    "*://cdn.jsdelivr.net/npm/jquery*"
+  ],
+  "global_variables": ["jQuery", "$"],
+  "known_issues": [
+    "Large library for modern use cases",
+    "CDN tracking possible",
+    "Version vulnerabilities in older releases"
+  ],
+  "alternatives": ["Vanilla JavaScript", "Alpine.js", "Petite Vue"],
+  "docs_url": "https://api.jquery.com/",
+  "is_active": true
+}

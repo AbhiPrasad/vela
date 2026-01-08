@@ -1,0 +1,20 @@
+{
+  "id": "square",
+  "name": "Square Web Payments SDK",
+  "vendor": "Square",
+  "category": "payment",
+  "url_patterns": [
+    "*://js.squareup.com/*",
+    "*://js.squareupsandbox.com/*",
+    "*://web.squarecdn.com/*"
+  ],
+  "global_variables": ["Square"],
+  "known_issues": [
+    "PCI compliant payments",
+    "Fraud detection",
+    "Device fingerprinting"
+  ],
+  "alternatives": ["Stripe", "PayPal", "Braintree"],
+  "docs_url": "https://developer.squareup.com/docs/web-payments/overview",
+  "is_active": true
+}

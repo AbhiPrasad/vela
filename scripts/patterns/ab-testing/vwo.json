@@ -1,0 +1,20 @@
+{
+  "id": "vwo",
+  "name": "VWO (Visual Website Optimizer)",
+  "vendor": "Wingify",
+  "category": "ab-testing",
+  "url_patterns": [
+    "*://dev.visualwebsiteoptimizer.com/*",
+    "*://cdn.vwo.com/*"
+  ],
+  "global_variables": ["VWO", "_vwo_code", "vwoCode"],
+  "known_issues": [
+    "Visual editor can add overhead",
+    "Blocking script",
+    "Content flicker possible",
+    "Session recording included"
+  ],
+  "alternatives": ["Optimizely", "Google Optimize", "AB Tasty"],
+  "docs_url": "https://developers.vwo.com/",
+  "is_active": true
+}

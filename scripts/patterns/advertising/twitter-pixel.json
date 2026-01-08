@@ -1,0 +1,20 @@
+{
+  "id": "twitter-pixel",
+  "name": "Twitter/X Pixel",
+  "vendor": "X Corp",
+  "category": "advertising",
+  "url_patterns": [
+    "*://static.ads-twitter.com/*",
+    "*://analytics.twitter.com/*",
+    "*://t.co/i/adsct*"
+  ],
+  "global_variables": ["twq"],
+  "known_issues": [
+    "Cross-site tracking",
+    "Conversion tracking",
+    "Sets persistent cookies"
+  ],
+  "alternatives": ["Server-side conversion tracking"],
+  "docs_url": "https://business.twitter.com/en/help/campaign-measurement-and-analytics/conversion-tracking-for-websites.html",
+  "is_active": true
+}

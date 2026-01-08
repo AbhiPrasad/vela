@@ -1,0 +1,21 @@
+{
+  "id": "google-analytics-4",
+  "name": "Google Analytics 4",
+  "vendor": "Google",
+  "category": "analytics",
+  "url_patterns": [
+    "*://www.googletagmanager.com/gtag/js*",
+    "*://www.google-analytics.com/g/collect*",
+    "*://analytics.google.com/*"
+  ],
+  "global_variables": ["gtag", "dataLayer", "ga"],
+  "known_issues": [
+    "Sets multiple cookies",
+    "Sends data to Google servers",
+    "Can impact page load performance",
+    "Cross-site tracking capabilities"
+  ],
+  "alternatives": ["Plausible", "Fathom", "Simple Analytics", "Umami"],
+  "docs_url": "https://developers.google.com/analytics",
+  "is_active": true
+}

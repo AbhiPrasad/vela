@@ -1,0 +1,21 @@
+{
+  "id": "shopify",
+  "name": "Shopify Analytics",
+  "vendor": "Shopify",
+  "category": "ecommerce",
+  "url_patterns": [
+    "*://cdn.shopify.com/*",
+    "*://monorail-edge.shopifysvc.com/*",
+    "*://*.myshopify.com/checkouts/*"
+  ],
+  "global_variables": ["Shopify", "ShopifyAnalytics"],
+  "known_issues": [
+    "E-commerce platform scripts",
+    "Checkout tracking",
+    "Customer analytics",
+    "App ecosystem scripts"
+  ],
+  "alternatives": ["WooCommerce", "BigCommerce", "Magento"],
+  "docs_url": "https://shopify.dev/",
+  "is_active": true
+}

@@ -1,0 +1,21 @@
+{
+  "id": "mapbox",
+  "name": "Mapbox",
+  "vendor": "Mapbox",
+  "category": "maps",
+  "url_patterns": [
+    "*://api.mapbox.com/*",
+    "*://tiles.mapbox.com/*",
+    "*://events.mapbox.com/*"
+  ],
+  "global_variables": ["mapboxgl"],
+  "known_issues": [
+    "Interactive maps",
+    "Usage tracking",
+    "Requires access token",
+    "Telemetry collection"
+  ],
+  "alternatives": ["Google Maps", "Leaflet", "OpenLayers"],
+  "docs_url": "https://docs.mapbox.com/mapbox-gl-js/",
+  "is_active": true
+}

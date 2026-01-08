@@ -1,0 +1,18 @@
+{
+  "id": "unpkg",
+  "name": "unpkg",
+  "vendor": "unpkg",
+  "category": "cdn",
+  "url_patterns": [
+    "*://unpkg.com/*"
+  ],
+  "global_variables": [],
+  "known_issues": [
+    "npm package CDN",
+    "No SLA guarantees",
+    "Third-party dependency"
+  ],
+  "alternatives": ["jsDelivr", "cdnjs", "Self-hosted"],
+  "docs_url": "https://unpkg.com/",
+  "is_active": true
+}

@@ -1,0 +1,20 @@
+{
+  "id": "onesignal",
+  "name": "OneSignal",
+  "vendor": "OneSignal",
+  "category": "push",
+  "url_patterns": [
+    "*://cdn.onesignal.com/*",
+    "*://onesignal.com/api/*"
+  ],
+  "global_variables": ["OneSignal"],
+  "known_issues": [
+    "Web push notifications",
+    "Device tracking",
+    "User segmentation",
+    "Service worker installation"
+  ],
+  "alternatives": ["Firebase Cloud Messaging", "Pusher", "WebPush"],
+  "docs_url": "https://documentation.onesignal.com/",
+  "is_active": true
+}

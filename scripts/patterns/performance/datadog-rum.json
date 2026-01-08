@@ -1,0 +1,21 @@
+{
+  "id": "datadog-rum",
+  "name": "Datadog RUM",
+  "vendor": "Datadog",
+  "category": "performance",
+  "url_patterns": [
+    "*://www.datadoghq-browser-agent.com/*",
+    "*://browser-intake-datadoghq.com/*",
+    "*://rum.browser-intake-datadoghq.com/*"
+  ],
+  "global_variables": ["DD_RUM", "DD_LOGS"],
+  "known_issues": [
+    "Real user monitoring",
+    "Session replay",
+    "Error tracking",
+    "Performance metrics"
+  ],
+  "alternatives": ["New Relic", "Dynatrace", "SpeedCurve"],
+  "docs_url": "https://docs.datadoghq.com/real_user_monitoring/",
+  "is_active": true
+}

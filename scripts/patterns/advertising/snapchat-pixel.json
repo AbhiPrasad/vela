@@ -1,0 +1,19 @@
+{
+  "id": "snapchat-pixel",
+  "name": "Snapchat Pixel",
+  "vendor": "Snap Inc",
+  "category": "advertising",
+  "url_patterns": [
+    "*://sc-static.net/scevent.min.js*",
+    "*://tr.snapchat.com/*"
+  ],
+  "global_variables": ["snaptr"],
+  "known_issues": [
+    "Cross-site tracking",
+    "Conversion tracking",
+    "Privacy concerns"
+  ],
+  "alternatives": ["Conversions API"],
+  "docs_url": "https://businesshelp.snapchat.com/s/article/snap-pixel-about",
+  "is_active": true
+}

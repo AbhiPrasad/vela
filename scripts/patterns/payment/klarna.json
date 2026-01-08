@@ -1,0 +1,20 @@
+{
+  "id": "klarna",
+  "name": "Klarna",
+  "vendor": "Klarna",
+  "category": "payment",
+  "url_patterns": [
+    "*://js.klarna.com/*",
+    "*://x.klarnacdn.net/*",
+    "*://eu.playground.klarna.com/*"
+  ],
+  "global_variables": ["Klarna", "klarnaAsyncCallback"],
+  "known_issues": [
+    "Buy now pay later",
+    "Checkout widgets",
+    "Credit check integration"
+  ],
+  "alternatives": ["Afterpay", "Affirm", "PayPal Pay Later"],
+  "docs_url": "https://docs.klarna.com/",
+  "is_active": true
+}

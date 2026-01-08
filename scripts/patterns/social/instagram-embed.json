@@ -1,0 +1,19 @@
+{
+  "id": "instagram-embed",
+  "name": "Instagram Embed",
+  "vendor": "Meta",
+  "category": "social",
+  "url_patterns": [
+    "*://www.instagram.com/embed.js*",
+    "*://platform.instagram.com/*"
+  ],
+  "global_variables": ["instgrm"],
+  "known_issues": [
+    "Heavy embed weight",
+    "Cross-site tracking",
+    "Performance impact for multiple embeds"
+  ],
+  "alternatives": ["Static images with links"],
+  "docs_url": "https://developers.facebook.com/docs/instagram/oembed/",
+  "is_active": true
+}

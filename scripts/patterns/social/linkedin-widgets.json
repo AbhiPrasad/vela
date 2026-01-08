@@ -1,0 +1,19 @@
+{
+  "id": "linkedin-widgets",
+  "name": "LinkedIn Widgets",
+  "vendor": "LinkedIn",
+  "category": "social",
+  "url_patterns": [
+    "*://platform.linkedin.com/in.js*",
+    "*://platform.linkedin.com/badges/*"
+  ],
+  "global_variables": ["IN"],
+  "known_issues": [
+    "Profile badges and share buttons",
+    "Cross-site tracking",
+    "Company page embeds"
+  ],
+  "alternatives": ["Custom share links", "Static badges"],
+  "docs_url": "https://docs.microsoft.com/en-us/linkedin/",
+  "is_active": true
+}

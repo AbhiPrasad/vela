@@ -1,0 +1,21 @@
+{
+  "id": "facebook-sdk",
+  "name": "Facebook SDK",
+  "vendor": "Meta",
+  "category": "social",
+  "url_patterns": [
+    "*://connect.facebook.net/*/sdk.js*",
+    "*://connect.facebook.net/*/all.js*",
+    "*://www.facebook.com/plugins/*"
+  ],
+  "global_variables": ["FB", "fbAsyncInit"],
+  "known_issues": [
+    "Social login and sharing",
+    "Cross-site tracking",
+    "Sets multiple cookies",
+    "Heavy script weight"
+  ],
+  "alternatives": ["Custom share buttons", "Web Share API"],
+  "docs_url": "https://developers.facebook.com/docs/javascript/",
+  "is_active": true
+}

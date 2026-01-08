@@ -1,0 +1,21 @@
+{
+  "id": "facebook-pixel",
+  "name": "Facebook Pixel",
+  "vendor": "Meta",
+  "category": "advertising",
+  "url_patterns": [
+    "*://connect.facebook.net/*/fbevents.js*",
+    "*://www.facebook.com/tr*",
+    "*://connect.facebook.net/signals/*"
+  ],
+  "global_variables": ["fbq", "_fbq"],
+  "known_issues": [
+    "Tracks users across sites",
+    "Sets long-lived cookies",
+    "Privacy concerns",
+    "GDPR/CCPA compliance required"
+  ],
+  "alternatives": ["Server-side tracking", "First-party analytics", "Conversion API"],
+  "docs_url": "https://developers.facebook.com/docs/meta-pixel",
+  "is_active": true
+}

@@ -1,0 +1,20 @@
+{
+  "id": "braintree",
+  "name": "Braintree",
+  "vendor": "PayPal",
+  "category": "payment",
+  "url_patterns": [
+    "*://js.braintreegateway.com/*",
+    "*://assets.braintreegateway.com/*"
+  ],
+  "global_variables": ["braintree"],
+  "known_issues": [
+    "Payment processing SDK",
+    "Fraud detection",
+    "Device data collection",
+    "PayPal integration"
+  ],
+  "alternatives": ["Stripe", "PayPal", "Square"],
+  "docs_url": "https://developer.paypal.com/braintree/docs",
+  "is_active": true
+}

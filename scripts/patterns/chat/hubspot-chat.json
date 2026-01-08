@@ -1,0 +1,20 @@
+{
+  "id": "hubspot-chat",
+  "name": "HubSpot Chat",
+  "vendor": "HubSpot",
+  "category": "chat",
+  "url_patterns": [
+    "*://js.hs-scripts.com/*",
+    "*://js.hubspot.com/*",
+    "*://js.usemessages.com/*"
+  ],
+  "global_variables": ["HubSpotConversations", "hsConversationsSettings"],
+  "known_issues": [
+    "Part of HubSpot CRM",
+    "Tracks visitor behavior",
+    "Integration with HubSpot analytics"
+  ],
+  "alternatives": ["Intercom", "Drift", "Crisp"],
+  "docs_url": "https://developers.hubspot.com/docs/api/conversation/conversations-widget",
+  "is_active": true
+}

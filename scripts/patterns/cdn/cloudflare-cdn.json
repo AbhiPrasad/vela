@@ -1,0 +1,19 @@
+{
+  "id": "cloudflare-cdn",
+  "name": "Cloudflare CDN",
+  "vendor": "Cloudflare",
+  "category": "cdn",
+  "url_patterns": [
+    "*://cdnjs.cloudflare.com/*",
+    "*://cdn.cloudflare.com/*"
+  ],
+  "global_variables": [],
+  "known_issues": [
+    "Popular open-source CDN",
+    "Minimal tracking",
+    "Good global performance"
+  ],
+  "alternatives": ["jsDelivr", "unpkg", "Self-hosted"],
+  "docs_url": "https://cdnjs.com/",
+  "is_active": true
+}

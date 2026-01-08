@@ -1,0 +1,22 @@
+{
+  "id": "adobe-analytics",
+  "name": "Adobe Analytics",
+  "vendor": "Adobe",
+  "category": "analytics",
+  "url_patterns": [
+    "*://assets.adobedtm.com/*",
+    "*://*.omtrdc.net/*",
+    "*://*.2o7.net/*",
+    "*://*.sc.omtrdc.net/*"
+  ],
+  "global_variables": ["s", "s_account", "s_code", "AppMeasurement"],
+  "known_issues": [
+    "Heavy script weight",
+    "Complex implementation",
+    "Sends data to Adobe servers",
+    "Multiple network requests"
+  ],
+  "alternatives": ["Google Analytics 4", "Mixpanel", "Amplitude"],
+  "docs_url": "https://experienceleague.adobe.com/docs/analytics/",
+  "is_active": true
+}

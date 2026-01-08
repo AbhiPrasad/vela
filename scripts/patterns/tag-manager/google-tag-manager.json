@@ -1,0 +1,20 @@
+{
+  "id": "google-tag-manager",
+  "name": "Google Tag Manager",
+  "vendor": "Google",
+  "category": "tag-manager",
+  "url_patterns": [
+    "*://www.googletagmanager.com/gtm.js*",
+    "*://www.googletagmanager.com/ns.html*"
+  ],
+  "global_variables": ["google_tag_manager", "dataLayer"],
+  "known_issues": [
+    "Can load arbitrary scripts",
+    "Difficult to audit all loaded tags",
+    "Performance impact depends on configured tags",
+    "Security risk if GTM access compromised"
+  ],
+  "alternatives": ["Direct script loading", "Tealium", "Adobe Launch"],
+  "docs_url": "https://developers.google.com/tag-platform/tag-manager",
+  "is_active": true
+}

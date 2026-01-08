@@ -1,0 +1,21 @@
+{
+  "id": "posthog",
+  "name": "PostHog",
+  "vendor": "PostHog",
+  "category": "analytics",
+  "url_patterns": [
+    "*://app.posthog.com/*",
+    "*://us.posthog.com/*",
+    "*://eu.posthog.com/*",
+    "*://*.posthog.com/static/*"
+  ],
+  "global_variables": ["posthog"],
+  "known_issues": [
+    "Session recording capability",
+    "Feature flags can delay rendering",
+    "Self-hostable for privacy"
+  ],
+  "alternatives": ["Amplitude", "Mixpanel", "Heap"],
+  "docs_url": "https://posthog.com/docs",
+  "is_active": true
+}

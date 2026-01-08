@@ -1,0 +1,21 @@
+{
+  "id": "hotjar",
+  "name": "Hotjar",
+  "vendor": "Hotjar",
+  "category": "session-recording",
+  "url_patterns": [
+    "*://static.hotjar.com/*",
+    "*://script.hotjar.com/*",
+    "*://vars.hotjar.com/*"
+  ],
+  "global_variables": ["hj", "hjSiteSettings"],
+  "known_issues": [
+    "Records user sessions",
+    "Can capture sensitive data if not configured properly",
+    "Heatmaps track all clicks",
+    "Privacy concerns"
+  ],
+  "alternatives": ["FullStory", "LogRocket", "Microsoft Clarity", "PostHog"],
+  "docs_url": "https://help.hotjar.com/",
+  "is_active": true
+}

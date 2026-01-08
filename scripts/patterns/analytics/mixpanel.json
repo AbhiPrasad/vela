@@ -1,0 +1,20 @@
+{
+  "id": "mixpanel",
+  "name": "Mixpanel",
+  "vendor": "Mixpanel",
+  "category": "analytics",
+  "url_patterns": [
+    "*://cdn.mxpnl.com/*",
+    "*://api.mixpanel.com/*",
+    "*://api-js.mixpanel.com/*"
+  ],
+  "global_variables": ["mixpanel"],
+  "known_issues": [
+    "Tracks user behavior",
+    "Sets persistent cookies",
+    "Sends data to Mixpanel servers"
+  ],
+  "alternatives": ["Amplitude", "Heap", "PostHog"],
+  "docs_url": "https://developer.mixpanel.com/",
+  "is_active": true
+}

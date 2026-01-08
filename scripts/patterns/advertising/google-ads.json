@@ -1,0 +1,22 @@
+{
+  "id": "google-ads",
+  "name": "Google Ads",
+  "vendor": "Google",
+  "category": "advertising",
+  "url_patterns": [
+    "*://www.googleadservices.com/*",
+    "*://googleads.g.doubleclick.net/*",
+    "*://www.google.com/pagead/*",
+    "*://pagead2.googlesyndication.com/*"
+  ],
+  "global_variables": ["google_trackConversion", "gtag"],
+  "known_issues": [
+    "Cross-site tracking",
+    "Sets multiple cookies",
+    "Conversion tracking across devices",
+    "Remarketing capabilities"
+  ],
+  "alternatives": ["Server-side conversion tracking", "First-party data solutions"],
+  "docs_url": "https://developers.google.com/google-ads/",
+  "is_active": true
+}

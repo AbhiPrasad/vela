@@ -1,0 +1,20 @@
+{
+  "id": "hcaptcha",
+  "name": "hCaptcha",
+  "vendor": "Intuition Machines",
+  "category": "security",
+  "url_patterns": [
+    "*://hcaptcha.com/*",
+    "*://js.hcaptcha.com/*",
+    "*://newassets.hcaptcha.com/*"
+  ],
+  "global_variables": ["hcaptcha"],
+  "known_issues": [
+    "Bot protection",
+    "Privacy-focused alternative to reCAPTCHA",
+    "Machine learning training data"
+  ],
+  "alternatives": ["reCAPTCHA", "Cloudflare Turnstile", "FriendlyCaptcha"],
+  "docs_url": "https://docs.hcaptcha.com/",
+  "is_active": true
+}

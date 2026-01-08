@@ -1,0 +1,21 @@
+{
+  "id": "paypal",
+  "name": "PayPal SDK",
+  "vendor": "PayPal",
+  "category": "payment",
+  "url_patterns": [
+    "*://www.paypal.com/sdk/js*",
+    "*://www.paypalobjects.com/*",
+    "*://t.paypal.com/*"
+  ],
+  "global_variables": ["paypal"],
+  "known_issues": [
+    "Payment buttons and checkout",
+    "Fraud detection",
+    "Third-party cookies",
+    "Heavy script bundle"
+  ],
+  "alternatives": ["Stripe", "Square", "Braintree"],
+  "docs_url": "https://developer.paypal.com/docs/checkout/",
+  "is_active": true
+}

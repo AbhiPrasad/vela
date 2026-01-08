@@ -1,0 +1,20 @@
+{
+  "id": "drift",
+  "name": "Drift",
+  "vendor": "Drift",
+  "category": "chat",
+  "url_patterns": [
+    "*://js.driftt.com/*",
+    "*://event.api.drift.com/*",
+    "*://chat.drift.com/*"
+  ],
+  "global_variables": ["drift", "driftt"],
+  "known_issues": [
+    "B2B chat platform",
+    "Tracks visitor behavior",
+    "Can identify returning visitors"
+  ],
+  "alternatives": ["Intercom", "HubSpot Chat", "Crisp"],
+  "docs_url": "https://devdocs.drift.com/",
+  "is_active": true
+}

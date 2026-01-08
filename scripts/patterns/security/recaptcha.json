@@ -1,0 +1,21 @@
+{
+  "id": "recaptcha",
+  "name": "Google reCAPTCHA",
+  "vendor": "Google",
+  "category": "security",
+  "url_patterns": [
+    "*://www.google.com/recaptcha/*",
+    "*://www.gstatic.com/recaptcha/*",
+    "*://recaptcha.google.com/*"
+  ],
+  "global_variables": ["grecaptcha"],
+  "known_issues": [
+    "Bot protection",
+    "User behavior tracking",
+    "Privacy concerns",
+    "Can block legitimate users"
+  ],
+  "alternatives": ["hCaptcha", "Cloudflare Turnstile", "FriendlyCaptcha"],
+  "docs_url": "https://developers.google.com/recaptcha",
+  "is_active": true
+}

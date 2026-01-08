@@ -1,0 +1,18 @@
+{
+  "id": "cloudflare-turnstile",
+  "name": "Cloudflare Turnstile",
+  "vendor": "Cloudflare",
+  "category": "security",
+  "url_patterns": [
+    "*://challenges.cloudflare.com/turnstile/*"
+  ],
+  "global_variables": ["turnstile"],
+  "known_issues": [
+    "Privacy-preserving bot protection",
+    "No visual puzzles required",
+    "Lightweight alternative to CAPTCHA"
+  ],
+  "alternatives": ["reCAPTCHA", "hCaptcha", "FriendlyCaptcha"],
+  "docs_url": "https://developers.cloudflare.com/turnstile/",
+  "is_active": true
+}

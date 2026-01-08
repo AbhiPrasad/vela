@@ -1,0 +1,21 @@
+{
+  "id": "onetrust",
+  "name": "OneTrust",
+  "vendor": "OneTrust",
+  "category": "consent",
+  "url_patterns": [
+    "*://cdn.cookielaw.org/*",
+    "*://optanon.blob.core.windows.net/*",
+    "*://geolocation.onetrust.com/*"
+  ],
+  "global_variables": ["OneTrust", "OptanonWrapper", "Optanon"],
+  "known_issues": [
+    "Enterprise consent management",
+    "Heavy script weight",
+    "Geolocation detection",
+    "Can significantly impact performance"
+  ],
+  "alternatives": ["Cookiebot", "TrustArc", "Osano"],
+  "docs_url": "https://developer.onetrust.com/",
+  "is_active": true
+}

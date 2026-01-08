@@ -1,0 +1,20 @@
+{
+  "id": "mouseflow",
+  "name": "Mouseflow",
+  "vendor": "Mouseflow",
+  "category": "session-recording",
+  "url_patterns": [
+    "*://cdn.mouseflow.com/*",
+    "*://o2.mouseflow.com/*"
+  ],
+  "global_variables": ["mouseflow", "_mfq"],
+  "known_issues": [
+    "Session recordings",
+    "Heatmaps and funnels",
+    "Form analytics",
+    "Can capture user input"
+  ],
+  "alternatives": ["Hotjar", "FullStory", "Microsoft Clarity"],
+  "docs_url": "https://help.mouseflow.com/",
+  "is_active": true
+}

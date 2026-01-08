@@ -1,0 +1,19 @@
+{
+  "id": "pinterest-tag",
+  "name": "Pinterest Tag",
+  "vendor": "Pinterest",
+  "category": "advertising",
+  "url_patterns": [
+    "*://ct.pinterest.com/*",
+    "*://s.pinimg.com/ct/*"
+  ],
+  "global_variables": ["pintrk"],
+  "known_issues": [
+    "Cross-site tracking",
+    "Conversion tracking",
+    "Sets persistent cookies"
+  ],
+  "alternatives": ["Conversions API"],
+  "docs_url": "https://help.pinterest.com/en/business/article/track-conversions-with-pinterest-tag",
+  "is_active": true
+}

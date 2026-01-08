@@ -1,0 +1,21 @@
+{
+  "id": "dynatrace",
+  "name": "Dynatrace RUM",
+  "vendor": "Dynatrace",
+  "category": "performance",
+  "url_patterns": [
+    "*://*.dynatrace.com/jstag/*",
+    "*://js-cdn.dynatrace.com/*",
+    "*://*.bf.dynatrace.com/*"
+  ],
+  "global_variables": ["dtrum", "dynaTrace"],
+  "known_issues": [
+    "Enterprise APM",
+    "Full stack monitoring",
+    "Session replay",
+    "AI-powered insights"
+  ],
+  "alternatives": ["New Relic", "Datadog", "AppDynamics"],
+  "docs_url": "https://www.dynatrace.com/support/help/",
+  "is_active": true
+}

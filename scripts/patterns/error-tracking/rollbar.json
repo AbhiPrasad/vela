@@ -1,0 +1,19 @@
+{
+  "id": "rollbar",
+  "name": "Rollbar",
+  "vendor": "Rollbar",
+  "category": "error-tracking",
+  "url_patterns": [
+    "*://cdn.rollbar.com/*",
+    "*://api.rollbar.com/*"
+  ],
+  "global_variables": ["Rollbar", "_rollbarConfig"],
+  "known_issues": [
+    "Error tracking",
+    "Deploy tracking",
+    "Can capture user data"
+  ],
+  "alternatives": ["Sentry", "Bugsnag", "Raygun"],
+  "docs_url": "https://docs.rollbar.com/",
+  "is_active": true
+}

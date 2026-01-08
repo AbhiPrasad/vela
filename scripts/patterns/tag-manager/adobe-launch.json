@@ -1,0 +1,19 @@
+{
+  "id": "adobe-launch",
+  "name": "Adobe Launch",
+  "vendor": "Adobe",
+  "category": "tag-manager",
+  "url_patterns": [
+    "*://assets.adobedtm.com/launch-*",
+    "*://assets.adobedtm.com/extensions/*"
+  ],
+  "global_variables": ["_satellite"],
+  "known_issues": [
+    "Part of Adobe Experience Platform",
+    "Can load arbitrary scripts",
+    "Heavy implementation"
+  ],
+  "alternatives": ["Google Tag Manager", "Tealium"],
+  "docs_url": "https://experienceleague.adobe.com/docs/experience-platform/tags/home.html",
+  "is_active": true
+}

@@ -1,0 +1,20 @@
+{
+  "id": "twitter-widgets",
+  "name": "Twitter/X Widgets",
+  "vendor": "X Corp",
+  "category": "social",
+  "url_patterns": [
+    "*://platform.twitter.com/widgets.js*",
+    "*://platform.twitter.com/embed/*",
+    "*://cdn.syndication.twimg.com/*"
+  ],
+  "global_variables": ["twttr"],
+  "known_issues": [
+    "Embeds tweets and timelines",
+    "Cross-site tracking",
+    "Performance impact for multiple embeds"
+  ],
+  "alternatives": ["Static screenshots", "Custom embeds"],
+  "docs_url": "https://developer.twitter.com/en/docs/twitter-for-websites",
+  "is_active": true
+}

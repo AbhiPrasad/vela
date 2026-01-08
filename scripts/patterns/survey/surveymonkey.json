@@ -1,0 +1,19 @@
+{
+  "id": "surveymonkey",
+  "name": "SurveyMonkey",
+  "vendor": "Momentive",
+  "category": "survey",
+  "url_patterns": [
+    "*://widget.surveymonkey.com/*",
+    "*://www.surveymonkey.com/collect/*"
+  ],
+  "global_variables": ["SMCX"],
+  "known_issues": [
+    "Survey embeds",
+    "Website collectors",
+    "Response tracking"
+  ],
+  "alternatives": ["Typeform", "Qualtrics", "Google Forms"],
+  "docs_url": "https://developer.surveymonkey.com/",
+  "is_active": true
+}

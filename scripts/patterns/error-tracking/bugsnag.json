@@ -1,0 +1,20 @@
+{
+  "id": "bugsnag",
+  "name": "Bugsnag",
+  "vendor": "SmartBear",
+  "category": "error-tracking",
+  "url_patterns": [
+    "*://d2wy8f7a9ursnm.cloudfront.net/*bugsnag*",
+    "*://notify.bugsnag.com/*",
+    "*://sessions.bugsnag.com/*"
+  ],
+  "global_variables": ["Bugsnag", "bugsnagClient"],
+  "known_issues": [
+    "Error monitoring",
+    "Release tracking",
+    "User context capture"
+  ],
+  "alternatives": ["Sentry", "Rollbar", "Raygun"],
+  "docs_url": "https://docs.bugsnag.com/",
+  "is_active": true
+}

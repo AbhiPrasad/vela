@@ -27,10 +27,11 @@ pnpm db:migrate:local         # Apply migrations locally
 pnpm db:migrate:remote        # Apply migrations to production
 
 # Pattern management CLI
-pnpm patterns list [--category <cat>]    # List patterns
+pnpm patterns list [--category <cat>]    # List patterns in database
 pnpm patterns get <id>                   # Get pattern by ID
 pnpm patterns add --id <id> ...          # Add new pattern
-pnpm patterns seed                       # Seed test patterns (GA4, Facebook Pixel)
+pnpm patterns seed                       # Seed all patterns from JSON files
+pnpm patterns seed --category analytics  # Seed only analytics patterns
 pnpm patterns export                     # Export patterns to JSON
 pnpm patterns import --file <file>       # Import patterns from JSON
 
@@ -48,6 +49,7 @@ pnpm admin:seed --email <email> --password <password> [--name <name>]  # Create 
 - `packages/typescript-config` - Shared tsconfig presets (base, worker, astro, library)
 - `migrations/` - D1 database migrations
 - `scripts/` - CLI tools for pattern management
+- `scripts/patterns/` - JSON files for third-party script patterns (organized by category)
 
 **Dependency Flow:**
 ```

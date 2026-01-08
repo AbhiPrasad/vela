@@ -1,0 +1,21 @@
+{
+  "id": "fingerprintjs",
+  "name": "FingerprintJS",
+  "vendor": "Fingerprint",
+  "category": "security",
+  "url_patterns": [
+    "*://cdn.jsdelivr.net/npm/@fingerprintjs/*",
+    "*://fpcdn.io/*",
+    "*://api.fpjs.io/*"
+  ],
+  "global_variables": ["FingerprintJS", "fpPromise"],
+  "known_issues": [
+    "Browser fingerprinting",
+    "Device identification",
+    "Fraud prevention",
+    "Privacy concerns"
+  ],
+  "alternatives": ["Server-side fraud detection"],
+  "docs_url": "https://dev.fingerprint.com/",
+  "is_active": true
+}

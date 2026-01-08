@@ -1,0 +1,21 @@
+{
+  "id": "criteo",
+  "name": "Criteo",
+  "vendor": "Criteo",
+  "category": "advertising",
+  "url_patterns": [
+    "*://static.criteo.net/*",
+    "*://dis.criteo.com/*",
+    "*://gum.criteo.com/*"
+  ],
+  "global_variables": ["criteo_q"],
+  "known_issues": [
+    "Retargeting ads",
+    "Cross-site tracking",
+    "Heavy cookie usage",
+    "Privacy concerns"
+  ],
+  "alternatives": ["First-party retargeting", "Contextual advertising"],
+  "docs_url": "https://www.criteo.com/",
+  "is_active": true
+}

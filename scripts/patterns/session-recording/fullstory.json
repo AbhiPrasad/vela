@@ -1,0 +1,21 @@
+{
+  "id": "fullstory",
+  "name": "FullStory",
+  "vendor": "FullStory",
+  "category": "session-recording",
+  "url_patterns": [
+    "*://fullstory.com/s/fs.js*",
+    "*://rs.fullstory.com/*",
+    "*://edge.fullstory.com/*"
+  ],
+  "global_variables": ["FS", "_fs_namespace"],
+  "known_issues": [
+    "Full session replay",
+    "Can capture sensitive form data",
+    "Privacy and compliance concerns",
+    "DOM reconstruction"
+  ],
+  "alternatives": ["Hotjar", "LogRocket", "Microsoft Clarity"],
+  "docs_url": "https://developer.fullstory.com/",
+  "is_active": true
+}

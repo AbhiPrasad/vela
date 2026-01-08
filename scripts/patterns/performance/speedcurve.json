@@ -1,0 +1,20 @@
+{
+  "id": "speedcurve",
+  "name": "SpeedCurve LUX",
+  "vendor": "SpeedCurve",
+  "category": "performance",
+  "url_patterns": [
+    "*://cdn.speedcurve.com/js/lux.js*",
+    "*://lux.speedcurve.com/*"
+  ],
+  "global_variables": ["LUX"],
+  "known_issues": [
+    "Real user monitoring",
+    "Core Web Vitals tracking",
+    "Performance budgets",
+    "Lightweight script"
+  ],
+  "alternatives": ["Web Vitals library", "Datadog RUM"],
+  "docs_url": "https://support.speedcurve.com/docs/rum-js-api",
+  "is_active": true
+}

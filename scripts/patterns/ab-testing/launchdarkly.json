@@ -1,0 +1,20 @@
+{
+  "id": "launchdarkly",
+  "name": "LaunchDarkly",
+  "vendor": "LaunchDarkly",
+  "category": "ab-testing",
+  "url_patterns": [
+    "*://app.launchdarkly.com/*",
+    "*://sdk.launchdarkly.com/*",
+    "*://events.launchdarkly.com/*"
+  ],
+  "global_variables": ["LDClient"],
+  "known_issues": [
+    "Feature flag platform",
+    "Can delay feature rendering",
+    "User targeting capabilities"
+  ],
+  "alternatives": ["Split.io", "Optimizely", "Flagsmith"],
+  "docs_url": "https://docs.launchdarkly.com/",
+  "is_active": true
+}

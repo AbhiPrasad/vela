@@ -1,0 +1,21 @@
+{
+  "id": "mailchimp",
+  "name": "Mailchimp",
+  "vendor": "Intuit",
+  "category": "marketing",
+  "url_patterns": [
+    "*://chimpstatic.com/*",
+    "*://downloads.mailchimp.com/*",
+    "*://*.list-manage.com/*"
+  ],
+  "global_variables": ["mc", "MailchimpSubscribe"],
+  "known_issues": [
+    "Email marketing",
+    "Popup forms",
+    "E-commerce tracking",
+    "Audience building"
+  ],
+  "alternatives": ["ConvertKit", "Klaviyo", "ActiveCampaign"],
+  "docs_url": "https://mailchimp.com/developer/",
+  "is_active": true
+}

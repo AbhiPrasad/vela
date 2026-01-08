@@ -1,0 +1,20 @@
+{
+  "id": "klaviyo",
+  "name": "Klaviyo",
+  "vendor": "Klaviyo",
+  "category": "marketing",
+  "url_patterns": [
+    "*://static.klaviyo.com/*",
+    "*://a.klaviyo.com/*"
+  ],
+  "global_variables": ["klaviyo", "_learnq"],
+  "known_issues": [
+    "E-commerce marketing",
+    "Email and SMS automation",
+    "Customer tracking",
+    "Product recommendations"
+  ],
+  "alternatives": ["Mailchimp", "Omnisend", "Drip"],
+  "docs_url": "https://developers.klaviyo.com/",
+  "is_active": true
+}

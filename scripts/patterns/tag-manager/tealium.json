@@ -1,0 +1,20 @@
+{
+  "id": "tealium",
+  "name": "Tealium iQ",
+  "vendor": "Tealium",
+  "category": "tag-manager",
+  "url_patterns": [
+    "*://tags.tiqcdn.com/*",
+    "*://collect.tealiumiq.com/*",
+    "*://tags.tiqcdn.cn/*"
+  ],
+  "global_variables": ["utag", "utag_data"],
+  "known_issues": [
+    "Enterprise tag manager",
+    "Can load arbitrary scripts",
+    "Complex configuration"
+  ],
+  "alternatives": ["Google Tag Manager", "Adobe Launch"],
+  "docs_url": "https://docs.tealium.com/",
+  "is_active": true
+}

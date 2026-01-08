@@ -1,0 +1,22 @@
+{
+  "id": "hubspot",
+  "name": "HubSpot Analytics",
+  "vendor": "HubSpot",
+  "category": "marketing",
+  "url_patterns": [
+    "*://js.hs-scripts.com/*",
+    "*://js.hscollectedforms.net/*",
+    "*://js.hs-analytics.net/*",
+    "*://forms.hubspot.com/*"
+  ],
+  "global_variables": ["_hsq", "hubspot"],
+  "known_issues": [
+    "Marketing automation platform",
+    "Form tracking",
+    "Visitor identification",
+    "CRM integration"
+  ],
+  "alternatives": ["Marketo", "Pardot", "ActiveCampaign"],
+  "docs_url": "https://developers.hubspot.com/docs/api/events/tracking-code",
+  "is_active": true
+}

@@ -1,0 +1,19 @@
+{
+  "id": "cookiebot",
+  "name": "Cookiebot",
+  "vendor": "Usercentrics",
+  "category": "consent",
+  "url_patterns": [
+    "*://consent.cookiebot.com/*",
+    "*://consentcdn.cookiebot.com/*"
+  ],
+  "global_variables": ["Cookiebot", "CookieConsent"],
+  "known_issues": [
+    "Cookie consent management",
+    "Can block other scripts",
+    "GDPR/CCPA compliance tool"
+  ],
+  "alternatives": ["OneTrust", "TrustArc", "Osano", "Cookie Notice"],
+  "docs_url": "https://www.cookiebot.com/en/developer/",
+  "is_active": true
+}

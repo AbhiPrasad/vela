@@ -1,0 +1,20 @@
+{
+  "id": "zendesk",
+  "name": "Zendesk Web Widget",
+  "vendor": "Zendesk",
+  "category": "chat",
+  "url_patterns": [
+    "*://static.zdassets.com/*",
+    "*://ekr.zdassets.com/*",
+    "*://*.zendesk.com/embeddable*"
+  ],
+  "global_variables": ["zE", "zESettings"],
+  "known_issues": [
+    "Multiple script loads",
+    "Can track user behavior",
+    "Moderate performance impact"
+  ],
+  "alternatives": ["Intercom", "Crisp", "Freshdesk"],
+  "docs_url": "https://developer.zendesk.com/documentation/zendesk-web-widget-sdks/",
+  "is_active": true
+}

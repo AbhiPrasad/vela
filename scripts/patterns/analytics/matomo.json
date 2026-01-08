@@ -1,0 +1,20 @@
+{
+  "id": "matomo",
+  "name": "Matomo",
+  "vendor": "Matomo",
+  "category": "analytics",
+  "url_patterns": [
+    "*://cdn.matomo.cloud/*",
+    "*://matomo.php*",
+    "*://piwik.php*"
+  ],
+  "global_variables": ["_paq", "Matomo", "Piwik"],
+  "known_issues": [
+    "Self-hostable for privacy",
+    "Can be configured for GDPR compliance",
+    "Legacy Piwik installations may have vulnerabilities"
+  ],
+  "alternatives": ["Plausible", "Umami", "Google Analytics 4"],
+  "docs_url": "https://developer.matomo.org/",
+  "is_active": true
+}

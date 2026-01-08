@@ -1,0 +1,21 @@
+{
+  "id": "marketo",
+  "name": "Marketo Munchkin",
+  "vendor": "Adobe",
+  "category": "marketing",
+  "url_patterns": [
+    "*://munchkin.marketo.net/*",
+    "*://*.mktoresp.com/*",
+    "*://*.marketo.com/js/*"
+  ],
+  "global_variables": ["Munchkin", "mktoMunchkin"],
+  "known_issues": [
+    "B2B marketing automation",
+    "Lead tracking",
+    "Form submissions",
+    "Email campaign tracking"
+  ],
+  "alternatives": ["HubSpot", "Pardot", "Eloqua"],
+  "docs_url": "https://developers.marketo.com/javascript-api/lead-tracking/",
+  "is_active": true
+}

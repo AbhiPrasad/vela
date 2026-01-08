@@ -1,0 +1,21 @@
+{
+  "id": "tiktok-pixel",
+  "name": "TikTok Pixel",
+  "vendor": "ByteDance",
+  "category": "advertising",
+  "url_patterns": [
+    "*://analytics.tiktok.com/*",
+    "*://ads.tiktok.com/*",
+    "*://events.tiktok.com/*"
+  ],
+  "global_variables": ["ttq"],
+  "known_issues": [
+    "Cross-site tracking",
+    "Data sent to ByteDance servers",
+    "Privacy concerns",
+    "Potential data sharing with China"
+  ],
+  "alternatives": ["Server-side Events API"],
+  "docs_url": "https://ads.tiktok.com/help/article?aid=10021",
+  "is_active": true
+}

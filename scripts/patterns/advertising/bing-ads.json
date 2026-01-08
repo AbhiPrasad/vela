@@ -1,0 +1,20 @@
+{
+  "id": "bing-ads",
+  "name": "Microsoft Advertising UET",
+  "vendor": "Microsoft",
+  "category": "advertising",
+  "url_patterns": [
+    "*://bat.bing.com/*",
+    "*://c.bing.com/*",
+    "*://c.clarity.ms/*"
+  ],
+  "global_variables": ["uetq", "UET"],
+  "known_issues": [
+    "Cross-site tracking",
+    "Conversion tracking",
+    "Integration with Clarity"
+  ],
+  "alternatives": ["Server-side tracking"],
+  "docs_url": "https://help.ads.microsoft.com/apex/index/3/en/56684",
+  "is_active": true
+}

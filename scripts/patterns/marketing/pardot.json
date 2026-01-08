@@ -1,0 +1,21 @@
+{
+  "id": "pardot",
+  "name": "Pardot (Salesforce)",
+  "vendor": "Salesforce",
+  "category": "marketing",
+  "url_patterns": [
+    "*://pi.pardot.com/*",
+    "*://cdn.pardot.com/*",
+    "*://go.pardot.com/*"
+  ],
+  "global_variables": ["piAId", "piCId", "piTracker"],
+  "known_issues": [
+    "B2B marketing automation",
+    "Lead scoring",
+    "Visitor tracking",
+    "Salesforce CRM integration"
+  ],
+  "alternatives": ["HubSpot", "Marketo", "ActiveCampaign"],
+  "docs_url": "https://help.salesforce.com/s/articleView?id=sf.pardot_tracking_code.htm",
+  "is_active": true
+}

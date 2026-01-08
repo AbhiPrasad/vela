@@ -1,0 +1,19 @@
+{
+  "id": "raygun",
+  "name": "Raygun",
+  "vendor": "Raygun",
+  "category": "error-tracking",
+  "url_patterns": [
+    "*://cdn.raygun.io/*",
+    "*://api.raygun.io/*"
+  ],
+  "global_variables": ["rg4js", "Raygun"],
+  "known_issues": [
+    "Crash reporting",
+    "Real user monitoring",
+    "User tracking capabilities"
+  ],
+  "alternatives": ["Sentry", "Bugsnag", "Rollbar"],
+  "docs_url": "https://raygun.com/documentation/",
+  "is_active": true
+}

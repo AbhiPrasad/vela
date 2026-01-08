@@ -1,0 +1,19 @@
+{
+  "id": "adroll",
+  "name": "AdRoll",
+  "vendor": "NextRoll",
+  "category": "advertising",
+  "url_patterns": [
+    "*://s.adroll.com/*",
+    "*://d.adroll.com/*"
+  ],
+  "global_variables": ["adroll", "__adroll"],
+  "known_issues": [
+    "Retargeting across web",
+    "Cross-site tracking",
+    "Multiple cookies set"
+  ],
+  "alternatives": ["First-party retargeting"],
+  "docs_url": "https://help.adroll.com/",
+  "is_active": true
+}

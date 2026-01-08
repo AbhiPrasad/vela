@@ -1,0 +1,20 @@
+{
+  "id": "linkedin-insight",
+  "name": "LinkedIn Insight Tag",
+  "vendor": "LinkedIn",
+  "category": "advertising",
+  "url_patterns": [
+    "*://snap.licdn.com/li.lms-analytics/*",
+    "*://px.ads.linkedin.com/*",
+    "*://www.linkedin.com/px/*"
+  ],
+  "global_variables": ["_linkedin_data_partner_ids", "lintrk"],
+  "known_issues": [
+    "B2B tracking",
+    "Cross-site user identification",
+    "Sets persistent cookies"
+  ],
+  "alternatives": ["Server-side conversion API", "First-party tracking"],
+  "docs_url": "https://www.linkedin.com/help/lms/answer/65513",
+  "is_active": true
+}

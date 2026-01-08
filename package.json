@@ -13,6 +13,7 @@
     "db:migrate:remote": "npx wrangler d1 migrations apply vela-db -c apps/api/wrangler.jsonc",
     "patterns": "tsx scripts/manage-patterns.ts",
     "patterns:seed": "tsx scripts/manage-patterns.ts seed --local",
+    "patterns:seed-json": "tsx scripts/seed-patterns-from-json.ts --local",
     "admin:seed": "tsx scripts/seed-admin.ts"
   },
   "devDependencies": {

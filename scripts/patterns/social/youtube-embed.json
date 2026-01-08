@@ -1,0 +1,22 @@
+{
+  "id": "youtube-embed",
+  "name": "YouTube Embed",
+  "vendor": "Google",
+  "category": "social",
+  "url_patterns": [
+    "*://www.youtube.com/iframe_api*",
+    "*://www.youtube.com/embed/*",
+    "*://www.youtube-nocookie.com/embed/*",
+    "*://s.ytimg.com/*"
+  ],
+  "global_variables": ["YT", "onYouTubeIframeAPIReady"],
+  "known_issues": [
+    "Heavy iframe payload",
+    "Tracking without nocookie domain",
+    "Performance impact",
+    "Third-party cookies"
+  ],
+  "alternatives": ["Lite YouTube embed", "Video facade patterns"],
+  "docs_url": "https://developers.google.com/youtube/iframe_api_reference",
+  "is_active": true
+}

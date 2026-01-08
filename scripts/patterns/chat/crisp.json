@@ -1,0 +1,19 @@
+{
+  "id": "crisp",
+  "name": "Crisp Chat",
+  "vendor": "Crisp",
+  "category": "chat",
+  "url_patterns": [
+    "*://client.crisp.chat/*",
+    "*://client.relay.crisp.chat/*"
+  ],
+  "global_variables": ["$crisp", "CRISP_WEBSITE_ID"],
+  "known_issues": [
+    "Lightweight chat widget",
+    "Co-browsing capabilities",
+    "Screen sharing features"
+  ],
+  "alternatives": ["Intercom", "Tawk.to", "LiveChat"],
+  "docs_url": "https://docs.crisp.chat/",
+  "is_active": true
+}

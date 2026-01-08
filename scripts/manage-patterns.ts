@@ -245,15 +245,16 @@ program
 
 program
   .command("seed")
-  .description("Seed database with test patterns (Google Analytics and Facebook Pixel)")
+  .description("Seed database with all patterns from scripts/patterns/*.json files")
   .option("-l, --local", "Use local D1 database", true)
+  .option("-c, --category <category>", "Only seed patterns from a specific category")
   .action((options) => {
     const localFlag = options.local ? "--local" : "";
-    const cmd = `npx wrangler d1 execute vela-db ${localFlag} -c apps/api/wrangler.jsonc --file=scripts/seed-patterns.sql`;
+    const categoryFlag = options.category ? `--category ${options.category}` : "";
+    const cmd = `npx tsx scripts/seed-patterns-from-json.ts ${localFlag} ${categoryFlag}`;
 
     try {
       execSync(cmd, { encoding: "utf-8", stdio: "inherit", cwd: process.cwd() });
-      console.log("\nSeeded 2 test patterns (Google Analytics 4, Facebook Pixel).");
     } catch (error) {
       console.error("Failed to seed patterns:", error);
       process.exit(1);

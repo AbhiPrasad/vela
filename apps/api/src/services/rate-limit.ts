@@ -7,6 +7,7 @@ interface RateLimitEntry {
 
 const WINDOW_SIZE = 60; // 1 minute window
 const MAX_REQUESTS = 10; // 10 requests per minute
+const MIN_TTL = 60; // Cloudflare KV minimum TTL
 
 export class RateLimitService {
   constructor(private kv: KVNamespace) {}
@@ -38,14 +39,15 @@ export class RateLimitService {
       return false;
     }
 
-    // Increment count
+    // Increment count - ensure TTL is at least MIN_TTL (Cloudflare KV requirement)
+    const remainingTtl = Math.ceil((entry.resetAt - now) / 1000);
     await this.kv.put(
       key,
       JSON.stringify({
         count: entry.count + 1,
         resetAt: entry.resetAt,
       }),
-      { expirationTtl: Math.ceil((entry.resetAt - now) / 1000) }
+      { expirationTtl: Math.max(remainingTtl, MIN_TTL) }
     );
 
     return true;

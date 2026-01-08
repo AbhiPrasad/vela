@@ -1,0 +1,20 @@
+{
+  "id": "microsoft-clarity",
+  "name": "Microsoft Clarity",
+  "vendor": "Microsoft",
+  "category": "session-recording",
+  "url_patterns": [
+    "*://www.clarity.ms/*",
+    "*://c.clarity.ms/*"
+  ],
+  "global_variables": ["clarity"],
+  "known_issues": [
+    "Free session recording",
+    "Integration with Bing Ads",
+    "Data shared with Microsoft",
+    "Heatmaps and recordings"
+  ],
+  "alternatives": ["Hotjar", "PostHog", "FullStory"],
+  "docs_url": "https://docs.microsoft.com/en-us/clarity/",
+  "is_active": true
+}

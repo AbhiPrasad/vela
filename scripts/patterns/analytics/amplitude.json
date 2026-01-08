@@ -1,0 +1,20 @@
+{
+  "id": "amplitude",
+  "name": "Amplitude",
+  "vendor": "Amplitude",
+  "category": "analytics",
+  "url_patterns": [
+    "*://cdn.amplitude.com/*",
+    "*://api.amplitude.com/*",
+    "*://api2.amplitude.com/*"
+  ],
+  "global_variables": ["amplitude"],
+  "known_issues": [
+    "Tracks user behavior",
+    "Device identification",
+    "Sends data to Amplitude servers"
+  ],
+  "alternatives": ["Mixpanel", "Heap", "PostHog"],
+  "docs_url": "https://www.docs.developers.amplitude.com/",
+  "is_active": true
+}

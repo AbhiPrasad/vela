@@ -1,0 +1,20 @@
+{
+  "id": "split",
+  "name": "Split.io",
+  "vendor": "Split",
+  "category": "ab-testing",
+  "url_patterns": [
+    "*://cdn.split.io/*",
+    "*://sdk.split.io/*",
+    "*://events.split.io/*"
+  ],
+  "global_variables": ["splitio", "SplitFactory"],
+  "known_issues": [
+    "Feature experimentation platform",
+    "Tracks feature usage",
+    "User segmentation"
+  ],
+  "alternatives": ["LaunchDarkly", "Optimizely", "Flagsmith"],
+  "docs_url": "https://help.split.io/",
+  "is_active": true
+}

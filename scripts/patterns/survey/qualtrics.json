@@ -1,0 +1,20 @@
+{
+  "id": "qualtrics",
+  "name": "Qualtrics",
+  "vendor": "Qualtrics",
+  "category": "survey",
+  "url_patterns": [
+    "*://*.qualtrics.com/WRQualtricsShared/*",
+    "*://znk2l1v5p1ovrfkw-sap.siteintercept.qualtrics.com/*"
+  ],
+  "global_variables": ["QSI"],
+  "known_issues": [
+    "Website feedback surveys",
+    "Experience management",
+    "Visitor tracking",
+    "Multiple intercept types"
+  ],
+  "alternatives": ["SurveyMonkey", "Typeform", "Hotjar Surveys"],
+  "docs_url": "https://www.qualtrics.com/support/",
+  "is_active": true
+}
