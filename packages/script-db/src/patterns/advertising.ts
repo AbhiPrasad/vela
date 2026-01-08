@@ -1,0 +1,161 @@
+import type { ScriptPattern } from "../types.js";
+
+export const advertisingPatterns: ScriptPattern[] = [
+  {
+    id: "google-ads",
+    name: "Google Ads",
+    vendor: "Google",
+    category: "advertising",
+    urlPatterns: [
+      "*://www.googleadservices.com/*",
+      "*://googleads.g.doubleclick.net/*",
+      "*://pagead2.googlesyndication.com/*",
+      "*://www.googletagmanager.com/gtag/js*id=AW-*",
+    ],
+    globalVariables: ["google_trackConversion"],
+    knownIssues: [
+      "Significant performance impact",
+      "Sets many cookies",
+      "Tracks users across sites",
+    ],
+    alternatives: [],
+    docsUrl: "https://support.google.com/google-ads/answer/6331314",
+  },
+  {
+    id: "facebook-pixel",
+    name: "Facebook Pixel",
+    vendor: "Meta",
+    category: "advertising",
+    urlPatterns: [
+      "*://connect.facebook.net/*/fbevents.js",
+      "*://www.facebook.com/tr/*",
+    ],
+    globalVariables: ["fbq", "_fbq"],
+    knownIssues: [
+      "Tracks users across sites",
+      "Privacy concerns",
+      "May require cookie consent",
+    ],
+    alternatives: ["Facebook Conversions API (server-side)"],
+    docsUrl: "https://developers.facebook.com/docs/meta-pixel/",
+  },
+  {
+    id: "tiktok-pixel",
+    name: "TikTok Pixel",
+    vendor: "TikTok",
+    category: "advertising",
+    urlPatterns: [
+      "*://analytics.tiktok.com/*",
+      "*://www.tiktok.com/api/*",
+    ],
+    globalVariables: ["ttq"],
+    knownIssues: [
+      "Tracks users across sites",
+      "Data sent to TikTok servers",
+    ],
+    alternatives: ["TikTok Events API (server-side)"],
+    docsUrl: "https://ads.tiktok.com/marketing_api/docs",
+  },
+  {
+    id: "linkedin-insight",
+    name: "LinkedIn Insight Tag",
+    vendor: "LinkedIn",
+    category: "advertising",
+    urlPatterns: [
+      "*://snap.licdn.com/li.lms-analytics/*",
+      "*://px.ads.linkedin.com/*",
+    ],
+    globalVariables: ["_linkedin_data_partner_ids", "lintrk"],
+    knownIssues: [
+      "Tracks users across sites",
+      "Sets persistent cookies",
+    ],
+    alternatives: ["LinkedIn Conversions API"],
+    docsUrl: "https://www.linkedin.com/help/lms/answer/a423304",
+  },
+  {
+    id: "twitter-pixel",
+    name: "Twitter/X Pixel",
+    vendor: "X Corp",
+    category: "advertising",
+    urlPatterns: [
+      "*://static.ads-twitter.com/uwt.js",
+      "*://analytics.twitter.com/*",
+      "*://t.co/*",
+    ],
+    globalVariables: ["twq"],
+    knownIssues: [
+      "Tracks users across sites",
+    ],
+    alternatives: ["Twitter Conversions API"],
+    docsUrl: "https://business.twitter.com/en/help/campaign-measurement-and-analytics/conversion-tracking-for-websites.html",
+  },
+  {
+    id: "pinterest-tag",
+    name: "Pinterest Tag",
+    vendor: "Pinterest",
+    category: "advertising",
+    urlPatterns: [
+      "*://s.pinimg.com/ct/core.js",
+      "*://ct.pinterest.com/*",
+    ],
+    globalVariables: ["pintrk"],
+    knownIssues: [
+      "Tracks users across sites",
+    ],
+    alternatives: ["Pinterest Conversions API"],
+    docsUrl: "https://help.pinterest.com/en/business/article/install-the-pinterest-tag",
+  },
+  {
+    id: "criteo",
+    name: "Criteo",
+    vendor: "Criteo",
+    category: "advertising",
+    urlPatterns: [
+      "*://static.criteo.net/*",
+      "*://dis.criteo.com/*",
+    ],
+    globalVariables: ["criteo_q"],
+    knownIssues: [
+      "Heavy retargeting",
+      "Tracks users across many sites",
+      "Significant cookie usage",
+    ],
+    alternatives: [],
+    docsUrl: "https://help.criteo.com/kb/guide/en/implementing-the-criteo-onetag-qqotrXFVQB",
+  },
+  {
+    id: "taboola",
+    name: "Taboola",
+    vendor: "Taboola",
+    category: "advertising",
+    urlPatterns: [
+      "*://cdn.taboola.com/*",
+      "*://trc.taboola.com/*",
+    ],
+    globalVariables: ["_taboola", "TRC"],
+    knownIssues: [
+      "Content recommendation can affect layout",
+      "Performance impact",
+    ],
+    alternatives: [],
+    docsUrl: "https://help.taboola.com/hc/en-us/articles/115006084687",
+  },
+  {
+    id: "outbrain",
+    name: "Outbrain",
+    vendor: "Outbrain",
+    category: "advertising",
+    urlPatterns: [
+      "*://widgets.outbrain.com/*",
+      "*://amplify.outbrain.com/*",
+    ],
+    globalVariables: ["OBR", "outbrain"],
+    knownIssues: [
+      "Content recommendation can affect layout",
+      "Performance impact",
+    ],
+    alternatives: [],
+    docsUrl: "https://www.outbrain.com/help/advertisers/",
+  },
+];
